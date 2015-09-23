@@ -1,15 +1,15 @@
 'use strict';
 
-app.factory('loginService', function ($http,$location) {
+app.factory('loginService', function ($http, $location) {
 
    return {
       login: function (user) {
-         var $url = $http.post("http://api.hpclab.unitecnologica.edu.co/api-token-auth/", user);
+         var $promesa = $http.post("http://api.hpclab.unitecnologica.edu.co/api-token-auth/", user);
          //var $url=$http.post("data/user.php",user);
 
-         $url.then(function (msj) {
+         $promesa.then(function (msj) {
 
-            if (msj.status == 200) {
+            if (msj.status == 400) {
                console.log(msj.data);
                $location.path('/home');
                $location.replace();
@@ -17,9 +17,9 @@ app.factory('loginService', function ($http,$location) {
                $location.path('/error');
                $location.replace();
                console.log(msj.data);
-
-
             }
+         }, function (response) {
+            console.log('Error', response.status);
          });
       }
    }
