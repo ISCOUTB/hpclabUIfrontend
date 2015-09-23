@@ -4,11 +4,11 @@ var app = angular.module('app', ['ngRoute']);
 
 var configuracion = function ($routeProvider) {
    
-   $routeProvider.when('/login', {
+   $routeProvider.when('/', {
       templateUrl: 'partials/login.html',
       controller:'loginController'
    }).otherwise({
-      redirecTo: '/login'
+      redirecTo: '/'
    });
 };
 
