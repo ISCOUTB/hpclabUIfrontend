@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('loginService', function ($http, $window) {
+app.factory('loginService', function ($http,$location) {
 
    return {
       login: function (user) {
@@ -11,9 +11,11 @@ app.factory('loginService', function ($http, $window) {
 
             if (msj.status == 200) {
                console.log(msj.data);
-               $window.location.href = '/home';
+               $location.path('/home');
+               $location.replace();
             } else {
-               $window.location.href = '/error';
+               $location.path('/error');
+               $location.replace();
                console.log(msj.data);
 
 
