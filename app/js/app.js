@@ -13,6 +13,10 @@ var configuracion = function ($routeProvider) {
       templateUrl: 'partials/home.html'
    });
    
+    $routeProvider.when('/error', {
+      templateUrl: 'partials/error.html'
+   });
+   
    $routeProvider.otherwise({
       redirecTo: '/'
    });
