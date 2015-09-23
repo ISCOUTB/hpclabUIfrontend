@@ -14,7 +14,6 @@ app.factory('loginService', function ($http, $location) {
 
          }, function (response) {
             console.log('Error', response.status);
-            console.log(msj.data);
             $location.path('/error');
             $location.replace();
          });
