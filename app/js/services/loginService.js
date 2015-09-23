@@ -8,18 +8,15 @@ app.factory('loginService', function ($http, $location) {
          //var $url=$http.post("data/user.php",user);
 
          $promesa.then(function (msj) {
+            console.log(msj.data);
+            $location.path('/home');
+            $location.replace();
 
-            if (msj.status == 400) {
-               console.log(msj.data);
-               $location.path('/home');
-               $location.replace();
-            } else {
-               $location.path('/error');
-               $location.replace();
-               console.log(msj.data);
-            }
          }, function (response) {
             console.log('Error', response.status);
+            console.log(msj.data);
+            $location.path('/error');
+            $location.replace();
          });
       }
    }
