@@ -1,0 +1,15 @@
+{
+  "name": "hpclabuifrontend",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend/issues"
+  },
+  "homepage": "https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend#readme"
+}
