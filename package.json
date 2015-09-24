@@ -11,5 +11,13 @@
   "bugs": {
     "url": "https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend/issues"
   },
-  "homepage": "https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend#readme"
+  "homepage": "https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend#readme",
+  "dependencies": {
+    "browser-sync": "^2.9.6",
+    "browser-sync-spa": "^1.0.3",
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "gulp-bower": "0.0.10"
+  }
 }
