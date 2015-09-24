@@ -20,8 +20,7 @@ gulp.task('serve', function () {
 });
 
 gulp.task('bower', function() {
-	return bower()
-		.pipe(gulp.dest('lib/'))
+	return bower();
 });
 
 gulp.task('default', ['bower','serve'])
