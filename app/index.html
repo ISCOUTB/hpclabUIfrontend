@@ -2,27 +2,27 @@
 <html lang="es" ng-app="app">
 
 <head>
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>HPC lab UI</title>
-   <meta name="description" content="">
-   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,900italic,900,700italic' rel='stylesheet' type='text/css'>
-   <link rel="stylesheet" href="css/estilo.css">
+    <meta charset="utf-8">
+    <title>HPC lab UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" src="bower_components/material-design-lite/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-   <div  class="cuerpo" ng-view>
-      
-   </div>
+<div class="mdl-grid" data-ng-view>
+
+</div>
 </body>
 
 <!--Externos JS -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<script type="text/javascript" src="https://code.angularjs.org/1.4.5/angular-route.min.js"></script>
+<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
 
 <!--Mis JS -->
 <script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/directives/loginDirective.js"></script>
 <script type="text/javascript" src="js/controllers/loginController.js"></script>
 <script type="text/javascript" src="js/services/loginService.js"></script>
 
