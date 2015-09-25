@@ -1,4 +1,4 @@
 cd /var/www/hpclabUIfrontend
 git pull
-bower install
+bower --allow-root install
 chown www-data:www-data *
