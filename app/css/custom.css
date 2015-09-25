@@ -1,0 +1,23 @@
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    text-align: center;
+    background: url('../images/hpc.jpeg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.automargin {
+    margin: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.center {
+    text-align: center;
+}
