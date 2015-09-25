@@ -7,31 +7,28 @@
     <title>HPC lab UI</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="css/custom.css">
-    <script type="text/javascript" src="bower_components/material-design-lite/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 </head>
 
 <body>
-<div class="mdl-grid" ui-view>
+<div layout="row" ui-view>
 </div>
 </body>
-
-<!--Externos JS -->
 
 <!-- Main Angular Scripts -->
 <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-material/angular-material.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
 
 <!--Angular App Scripts -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/config.js"></script>
 <script type="text/javascript" src="js/modules/login.js"></script>
-<!-- <script type="text/javascript" src="js/controllers/loginController.js"></script>
-<script type="text/javascript" src="js/services/loginService.js"></script>-->
+
 
 </html>

@@ -10,21 +10,14 @@
 	});
 
 	login.factory('loginService', function ($http, $location) {
-
 		return {
-			login: function (user) {
-				var $promesa = $http.post("http://api.hpclab.unitecnologica.edu.co/api-token-auth/", user);
-				//var $url=$http.post("data/user.php",user);
-
-				$promesa.then(function (msj) {
-					console.log(msj.data);
+			login : function (user) {
+				var $promise = $http.post("http://api.hpclab.unitecnologica.edu.co/api-token-auth/", user);
+				$promise.then(function (response) {
 					$location.path('/home');
 					$location.replace();
-
 				}, function (response) {
-					console.log('Error', response.status);
-					$location.path('/error');
-					$location.replace();
+					user.error = true;
 				});
 			}
 		}

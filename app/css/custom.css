@@ -21,3 +21,12 @@
 .center {
     text-align: center;
 }
+
+.alert {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.right {
+    float: right;
+}
