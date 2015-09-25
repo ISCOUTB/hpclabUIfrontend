@@ -2,25 +2,14 @@ var configuracion = function ($stateProvider, $urlRouterProvider, $locationProvi
 
 	$ocLazyLoadProvider.config({
 		enabled     : true,
-		requireBase : false,
-		modules : [
-			{
-				name  : "loginmodule",
-				files : ['js/modules/login.js']
-			}
-		]
+		requireBase : false
 	});
 
 	$stateProvider
 		.state('login', {
 			url         : '/login',
 			templateUrl : 'partials/login.html',
-			resolve     : {
-				lazy : ['$ocLazyLoad', function ($ocLazyLoad) {
-					return $ocLazyLoad.load("loginmodule");
-				}]
-			},
-			controller  : 'loginController'
+			controller  : 'loginController',
 		})
 		.state('home', {
 			url         : '/home',
@@ -35,9 +24,6 @@ var configuracion = function ($stateProvider, $urlRouterProvider, $locationProvi
 			requireBase : false
 		});
 	}
-
-
 };
-
 
 angular.module('app').config(configuracion);

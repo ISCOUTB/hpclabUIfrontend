@@ -2,6 +2,7 @@
 (function () {
 	var app = angular.module('app', [
 		'ui.router',
-		'oc.lazyLoad'
+		'oc.lazyLoad',
+		'loginmodule'
 	]);
 })();
