@@ -1,12 +1,12 @@
 'use strict';
 (function () {
-   var app = angular.module('app');
+   var factories = angular.module('factories',[]);
 
    /**
     * Factory Http Error Response Interceptor
     */
 
-   app.factory('httpErrorResponseInterceptor', ['$q', '$location', '$localStorage',
+   factories.factory('httpErrorResponseInterceptor', ['$q', '$location', '$localStorage',
 		function ($q, $location, $localStorage) {
          return {
             request: function (config) {
@@ -39,7 +39,7 @@
     *  Factory Authentication
     */
 
-   app.factory('Auth', ['$http', '$localStorage', function ($http, $localStorage, urls) {
+   factories.factory('Auth', ['$http', '$localStorage', function ($http, $localStorage, urls) {
       function urlBase64Decode(str) {
          var output = str.replace('-', '+').replace('_', '/');
          switch (output.length % 4) {
@@ -84,5 +84,18 @@
       };
 	}]);
 
+   /**
+      Get sever Name
+   **/
+   factories.factory('getToken', function () {
+      var token=window.localStorage.getItem("token");
+      return token;
+   });
+
+
+   factories.factory('getServerName', function () {
+
+      return 'https://api.hpclab.unitecnologica.edu.co';
+   });
 
 })();

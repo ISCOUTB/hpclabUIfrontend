@@ -17,12 +17,12 @@
       }
    });
 
-   login.factory('jwt_loginService', function ($http) {
+   login.factory('jwt_loginService', function ($http,getServerName) {
       var loginSvc = {};
       loginSvc.login = function (user) {
          return $http({
             method: "POST",
-            url: "https://api.hpclab.unitecnologica.edu.co/api-token-auth/",
+            url: getServerName+"/api-token-auth/",
             data: user
          });
       }
@@ -32,7 +32,7 @@
    login.factory('loginService', function ($http, $location) {
       return {
          login: function (user) {
-            var $promise = $http.post("https://api.hpclab.unitecnologica.edu.co/api-token-auth/", user);
+            var $promise = $http.post("/api-token-auth/", user);
             $promise.then(function (response) {
                $location.path('/home');
                $location.replace();
