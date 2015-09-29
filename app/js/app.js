@@ -12,8 +12,15 @@
       'homemodule'
 	]);
 
+   var configuracion = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider,$httpProvider,jwtInterceptorProvider) {
 
-   var configuracion = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider) {
+      jwtInterceptorProvider.tokenGetter=function(){
+         var token=window.localStorage.getItem("token");
+         return token;
+      }
+
+      $httpProvider.interceptors.push('jwtInterceptor');
+
 
 
       $stateProvider

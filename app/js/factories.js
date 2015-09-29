@@ -87,7 +87,7 @@
    /**
       Get sever Name
    **/
-   factories.factory('getToken', function () {
+   factories.service('getToken', function () {
       var token=window.localStorage.getItem("token");
       return token;
    });
