@@ -11,8 +11,8 @@
 
                window.localStorage.setItem("token", token);
             }
-            $location.path('/home');
 
+            $location.path('/home');
          });
       }
    });
