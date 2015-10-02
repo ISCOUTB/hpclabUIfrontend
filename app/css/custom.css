@@ -1,14 +1,3 @@
-.demo-card-wide > .mdl-card__title {
-    color: #fff;
-    height: 176px;
-    text-align: center;
-    background: url('../images/hpc.jpeg') center / cover;
-}
-
-.demo-card-wide > .mdl-card__menu {
-    color: #fff;
-}
-
 .automargin {
     margin: auto;
     position: relative;
@@ -29,4 +18,17 @@
 
 .right {
     float: right;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    position: fixed;
+    bottom: 0;
+    height: 50%;
+    width: 100%;
+}
+
+.dragover {
+    border: 5px dashed blue;
 }

@@ -1,9 +1,10 @@
-<div>
-   
-  <div class="upload-files">
-     
-     <h1 class="label-cargar">Cargar Archivo</h1>
-     <button type="button" ng-click="sendRequest()">SEND REQUEST</button>
-  </div>
-   
+<div flex flex-order="1">
+
+    <div ngf-drop="uploadFiles($files)" ng-model="files" ngf-drag-over-class="dragover" ngf-multiple="true"
+         class="drop-box upload-files">
+
+        <h1 class="label-cargar">Cargar Archivo</h1>
+        <button type="button" ng-click="sendRequest()">SEND REQUEST</button>
+    </div>
+
 </div>

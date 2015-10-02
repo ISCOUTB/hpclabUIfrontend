@@ -13,8 +13,8 @@
                         <input class="mdl-textfield__input" name="username" type="text" id="username" required
                                ng-model="user.username" pattern="^[(t|T]?([0-9]{8})$"/>
 
-                        <div ng-messages="loginForm.username.$error" role="alert">
-                            <div ng-if="loginForm.username.$touched" ng-message="required">
+                        <div ng-if="loginForm.username.$touched" ng-messages="loginForm.username.$error" role="alert">
+                            <div ng-message="required">
                                 Por favor digite el nombre de usuario
                             </div>
                             <div ng-message="pattern">
@@ -27,8 +27,8 @@
                         <input class="mdl-textfield__input" name="password" type="password" id="password" required
                                ng-model="user.password" pattern="^[A-Za-z0-9]{6}$"/>
 
-                        <div ng-messages="loginForm.password.$error" role="alert">
-                            <div ng-if="loginForm.password.$touched" ng-message="required">
+                        <div ng-if="loginForm.password.$touched" ng-messages="loginForm.password.$error" role="alert">
+                            <div ng-message="required">
                                 Por favor digite la contraseña.
                             </div>
                             <div ng-message="pattern">
