@@ -94,8 +94,9 @@
 
 
    factories.factory('getServerName', function () {
-
-      return 'http://0.0.0.0:9000';
+      //return 'http://0.0.0.0:9000' Local server
+      return 'http://172.16.9.154:9000';
+      //return 'https://api.hpclab.unitecnologica.edu.co';
    });
 
 })();
