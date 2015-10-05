@@ -1,102 +1,71 @@
 'use strict';
 (function () {
-   var factories = angular.module('factories',[]);
+        var factories = angular.module('factories', ['angular-jwt']);
 
-   /**
-    * Factory Http Error Response Interceptor
-    */
+        factories.factory('httpErrorResponseInterceptor', ['$q', '$location',
+                function ($q, $location) {
+                        return {
+                                request: function (config) {
+                                        config.headers = config.headers || {};
+                                        var token = localStorage.getItem('token');
+                                        if (token) {
+                                                config.headers.Authorization = 'Bearer ' + token;
+                                        }
+                                        return config;
+                                },
+                                response: function (responseData) {
+                                        return responseData;
+                                },
+                                responseError: function error(response) {
+                                        switch (response.status) {
+                                                case 401:
+                                                        $location.path('/login');
+                                                        break;
+                                                case 404:
+                                                        $location.path('/404');
+                                                        break;
+                                        }
 
-   factories.factory('httpErrorResponseInterceptor', ['$q', '$location', '$localStorage',
-		function ($q, $location, $localStorage) {
-         return {
-            request: function (config) {
-               config.headers = config.headers || {};
-               if ($localStorage.token) {
-                  config.headers.Authorization = 'Bearer' + $localStorage.token;
-               }
-               return config;
-            },
-            response: function (responseData) {
-               return responseData;
-            },
-            responseError: function error(response) {
-               switch (response.status) {
-               case 401:
-                  $location.path('/login');
-                  break;
-               case 404:
-                  $location.path('/404');
-                  break;
-               }
+                                        return $q.reject(response);
+                                }
+                        };
+                }
+        ]);
 
-               return $q.reject(response);
-            }
-         };
-		}
-	]);
+        factories.factory('Auth', ['$http', function ($http) {
+                function getClaimsFromToken() {
+                        var token = localStorage.getItem('token');
+                        var user = {};
+                        user = jwtHelper.decodeToken(token);
+                        return user;
+                }
 
-   /*
-    *  Factory Authentication
-    */
+                var tokenClaims = getClaimsFromToken();
 
-   factories.factory('Auth', ['$http', '$localStorage', function ($http, $localStorage, urls) {
-      function urlBase64Decode(str) {
-         var output = str.replace('-', '+').replace('_', '/');
-         switch (output.length % 4) {
-         case 0:
-            break;
-         case 2:
-            output += '==';
-            break;
-         case 3:
-            output += '=';
-            break;
-         default:
-            throw 'Illegal base64url string!';
-         }
-         return window.atob(output);
-      }
+                return {
+                        login: function (data, success, error) {
+                                $http.post('/login', data).success(success).error(error)
+                        },
+                        logout: function (success) {
+                                tokenClaims = {};
+                                delete localStorage.removeItem('token');
+                                success();
+                        },
+                        getTokenClaims: function () {
+                                return tokenClaims;
+                        }
+                };
+        }]);
 
-      function getClaimsFromToken() {
-         var token = $localStorage.token;
-         var user = {};
-         if (typeof token !== 'undefined') {
-            var encoded = token.split('.')[1];
-            user = JSON.parse(urlBase64Decode(encoded));
-         }
-         return user;
-      }
+        factories.service('getToken', function () {
+                var token = localStorage.getItem('token');
+                return token;
+        });
 
-      var tokenClaims = getClaimsFromToken();
-
-      return {
-         login: function (data, success, error) {
-            $http.post('/login', data).success(success).error(error)
-         },
-         logout: function (success) {
-            tokenClaims = {};
-            delete $localStorage.token;
-            success();
-         },
-         getTokenClaims: function () {
-            return tokenClaims;
-         }
-      };
-	}]);
-
-   /**
-      Get sever Name
-   **/
-   factories.service('getToken', function () {
-      var token=window.localStorage.getItem("token");
-      return token;
-   });
-
-
-   factories.factory('getServerName', function () {
-      //return 'http://0.0.0.0:9000' Local server
-      return 'http://172.16.9.154:9000';
-      //return 'https://api.hpclab.unitecnologica.edu.co';
-   });
+        factories.factory('getServerName', function () {
+                return 'http://0.0.0.0:9000';
+                //return 'http://172.16.9.154:9000';
+                //return 'https://api.hpclab.unitecnologica.edu.co';
+        });
 
 })();

@@ -21,7 +21,6 @@
         "angular-ui-router": "~0.2.15",
         "oclazyload": "~1.0.5",
         "angular-jwt": "~0.0.9",
-        "ng-file-upload": "~7.3.9",
-        "material-design-lite": "~1.0.5"
+        "ng-file-upload": "~7.3.9"
     }
 }

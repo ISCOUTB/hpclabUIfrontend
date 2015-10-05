@@ -23,10 +23,7 @@
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
-    position: fixed;
-    bottom: 0;
     height: 50%;
-    width: 100%;
 }
 
 .dragover {

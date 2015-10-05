@@ -10,8 +10,8 @@
                 <form name="loginForm" novalidate>
                     <md-input-container>
                         <label for="username">Nombre de usuario</label>
-                        <input class="mdl-textfield__input" name="username" type="text" id="username" required
-                               ng-model="user.username" pattern="^[(t|T]?([0-9]{8})$"/>
+                        <input name="username" type="text" id="username" required ng-model="user.username"
+                               pattern="^[(t|T]?([0-9]{8})$"/>
 
                         <div ng-if="loginForm.username.$touched" ng-messages="loginForm.username.$error" role="alert">
                             <div ng-message="required">
@@ -24,8 +24,8 @@
                     </md-input-container>
                     <md-input-container>
                         <label for="password">Contraseña</label>
-                        <input class="mdl-textfield__input" name="password" type="password" id="password" required
-                               ng-model="user.password" pattern="^[A-Za-z0-9]{6}$"/>
+                        <input name="password" type="password" id="password" required ng-model="user.password"
+                               pattern="^[A-Za-z0-9]{6}$"/>
 
                         <div ng-if="loginForm.password.$touched" ng-messages="loginForm.password.$error" role="alert">
                             <div ng-message="required">
