@@ -1,0 +1,33 @@
+.automargin {
+    margin: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.alert {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.right {
+    float: right;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    height: 50%;
+}
+
+.dragover {
+    border: 5px dashed blue;
+}
+
+

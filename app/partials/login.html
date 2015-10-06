@@ -1,3 +1,51 @@
-<div class="cuerpo--content_login" login-directive>
-   
+<div class="automargin">
+    <md-content class="md-padding">
+        <md-card>
+            <img src="images/hpc.jpeg" class="md-card-image" alt="HPCLab">
+            <md-card-content>
+                <h2 class="md-title">
+                    Bienvenido
+                </h2>
+
+                <form name="loginForm" novalidate>
+                    <md-input-container>
+                        <label for="username">Nombre de usuario</label>
+                        <input name="username" type="text" id="username" required ng-model="user.username"
+                               pattern="^[(t|T]?([0-9]{8})$"/>
+
+                        <div ng-if="loginForm.username.$touched" ng-messages="loginForm.username.$error" role="alert">
+                            <div ng-message="required">
+                                Por favor digite el nombre de usuario
+                            </div>
+                            <div ng-message="pattern">
+                                Digite un nombre de usuario valido.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container>
+                        <label for="password">Contraseña</label>
+                        <input name="password" type="password" id="password" required ng-model="user.password"
+                               pattern="^[A-Za-z0-9]{6}$"/>
+
+                        <div ng-if="loginForm.password.$touched" ng-messages="loginForm.password.$error" role="alert">
+                            <div ng-message="required">
+                                Por favor digite la contraseña.
+                            </div>
+                            <div ng-message="pattern">
+                                Digite una contraseña valida.
+                            </div>
+                        </div>
+                    </md-input-container>
+                </form>
+            </md-card-content>
+            <div class="md-actions" layout="row" layout-align="center">
+                <md-button class="md-raised" ng-disabled="loginForm.$invalid || loginForm.$pristine"
+                           ng-click="login(user)">Iniciar sesión
+                </md-button>
+            </div>
+        </md-card>
+    </md-content>
+    <md-toast class="alert" ng-if="user.error">
+        <span flex>Usuario o contraseña incorrectos.</span>
+    </md-toast>
 </div>
