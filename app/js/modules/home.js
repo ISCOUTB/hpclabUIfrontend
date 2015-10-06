@@ -53,7 +53,7 @@
                 });
 
                 $scope.$watch('files', function () {
-                        $scope.upload($scope.files)
+                        $scope.upload($scope.files);
                 });
 
                 $scope.upload = function (files) {
@@ -68,6 +68,12 @@
                                         });
                                 }
                         }
+                }
+
+                $scope.deleteFile = function (id) {
+                        requestService.deleteFile(id).then(function (result){
+                                console.log("ha sido eliminada");
+                        })
                 }
 
         });
@@ -155,6 +161,14 @@
                                         type: file.type
                                 }
                         });
+                };
+
+                requestSvc.deleteFile = function(id){
+                        return $http({
+                                method: "DELETE",
+                                skipAuthorization: false,
+                                url: getServerName + '/files/' + id  + '/'
+                        })
                 };
 
 
