@@ -76,7 +76,7 @@
     <md-content class="md-padding">
         <md-card>
             <md-card-content>
-                <p>Nuevo proyecto</p>
+                <p>Creación o edición de proyectos</p>
 
                 <form name="ProjectForm" novalidate>
                     <md-input-container>
@@ -109,13 +109,13 @@
                 <h6>Proyectos</h6>
                 <md-list>
                     <md-list-item class="md-1-line" ng-repeat="project in projects">
-                        <div class="md-list-item-text">
-                            <h6>{{project.name}}
-                                <md-button style="float: right" ng-click="deleteProject($event, project.id)"
-                                           class="md-warn">Borrar
-                                </md-button>
-                            </h6>
-                        </div>
+                        <h6>{{project.name}}</h6>
+                        <md-button style="float: right" ng-click="getProject(project.id)"
+                                   class="md-warn">Editar
+                        </md-button>
+                        <md-button style="float: right" ng-click="deleteProject($event, project.id)"
+                                   class="md-warn">Borrar
+                        </md-button>
                         <md-divider ng-if="!$last"></md-divider>
                     </md-list-item>
                 </md-list>

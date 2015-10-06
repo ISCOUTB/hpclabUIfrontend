@@ -28,12 +28,23 @@
                         });
                 };
 
+                $scope.getProject = function (id) {
+                        requestService.getProject(id).then(function (result) {
+                                console.log(result.data)
+                        });
+                };
+
+                $scope.updateProject = function (id, uProject) {
+                        requestService.updateProject(id, uProject).then(function (result) {
+                                console.log(result.data)
+                        });
+                };
+
                 $scope.deleteProject = function ($event, id) {
                         var parentID = $event.target.parentElement;
                         requestService.deleteProject(id).then(function (result) {
                                 parentID.remove();
                                 console.log("ha sido eliminado");
-
                         })
                 };
 
@@ -95,6 +106,23 @@
                                 method: "POST",
                                 skipAuthorization: false,
                                 url: getServerName + '/projects/',
+                                data: project
+                        })
+                };
+
+                requestSvc.getProject = function (id) {
+                        return $http({
+                                method: "GET",
+                                skipAuthorization: false,
+                                url: getServerName + '/projects/' + id + '/'
+                        })
+                };
+
+                requestSvc.updateProject = function (id, project) {
+                        return $http({
+                                method: "PUT",
+                                skipAuthorization: false,
+                                url: getServerName + '/projects/' + id + '/',
                                 data: project
                         })
                 };
