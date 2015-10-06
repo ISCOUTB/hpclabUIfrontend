@@ -15,16 +15,26 @@
                         });
                 };
 
-                $scope.getProjects = function () {
-                        requestService.getProjects().then(function (result) {
-                                $scope.projects = result.data;
-                        });
-                };
+                requestService.getProjects().then(function (result) {
+                        $scope.projects = result.data;
+                });
 
                 $scope.createProject = function (project) {
                         requestService.createProject(project).then(function (result) {
-                                $scope.dataProjects.push(result);
+                                $scope.projects.push(result.data);
+                                $scope.project = [];
+                                $scope.ProjectForm.$setPristine();
+                                $scope.ProjectForm.$setUntouched();
                         });
+                };
+
+                $scope.deleteProject = function ($event, id) {
+                        var parentID = $event.target.parentElement;
+                        requestService.deleteProject(id).then(function (result) {
+                                parentID.remove();
+                                console.log("ha sido eliminado");
+
+                        })
                 };
 
                 requestService.getFiles().then(function (result) {
@@ -86,6 +96,14 @@
                                 skipAuthorization: false,
                                 url: getServerName + '/projects/',
                                 data: project
+                        })
+                };
+
+                requestSvc.deleteProject = function (id) {
+                        return $http({
+                                method: "DELETE",
+                                skipAuthorization: false,
+                                url: getServerName + '/projects/' + id + '/'
                         })
                 };
 
