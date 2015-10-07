@@ -15,7 +15,8 @@
   "dependencies": {
     "browser-sync": "^2.9.6",
     "browser-sync-spa": "^1.0.3",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-stylus": "^2.1.0"
   },
   "devDependencies": {
     "gulp-bower": "0.0.10"

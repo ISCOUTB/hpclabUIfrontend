@@ -11,7 +11,8 @@
 		'loginmodule',
 		'homemodule',
 		'iniciomodule',
-		'ngMdIcons'
+		'ngMdIcons',
+		'ui.materialize'
 	]);
 
 	var config = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider) {
@@ -22,7 +23,6 @@
 					$rootScope.processing = true;
 					var token = localStorage.getItem('token');
 					if (token && !jwtHelper.isTokenExpired(token)) {
-						console.log("Is valid and is not expired");
 						conf.headers.Authorization = 'Bearer ' + token;
 						$location.path("/inicio");
 					} else {
@@ -37,17 +37,17 @@
 		$stateProvider
 			.state('login', {
 				url         : '/login',
-				templateUrl : 'partials/login.html',
+				templateUrl : 'views/login.html',
 				controller  : 'loginController'
 			})
 			.state('home', {
 				url         : '/home',
-				templateUrl : 'partials/home.html',
+				templateUrl : 'views/home.html',
 				controller  : 'HomeController'
 			})
 			.state('inicio', {
 				url         : '/inicio',
-				templateUrl : 'partials/inicio.html',
+				templateUrl : 'views/inicio.html',
 				controller  : 'InicioController'
 			});
 
@@ -62,6 +62,4 @@
 	};
 
 	app.config(config);
-
-
 })();
