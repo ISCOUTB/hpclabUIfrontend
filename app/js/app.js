@@ -5,13 +5,11 @@
 		'ui.router',
 		'angular-jwt',
 		'oc.lazyLoad',
-		'ngMaterial',
 		'ngMessages',
 		'factories',
 		'loginmodule',
 		'homemodule',
 		'iniciomodule',
-		'ngMdIcons',
 		'ui.materialize'
 	]);
 
@@ -24,7 +22,7 @@
 					var token = localStorage.getItem('token');
 					if (token && !jwtHelper.isTokenExpired(token)) {
 						conf.headers.Authorization = 'Bearer ' + token;
-						$location.path("/inicio");
+						$location.path("/home");
 					} else {
 						localStorage.removeItem('token');
 						$location.path("/login");
