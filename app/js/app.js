@@ -5,13 +5,12 @@
 		'ui.router',
 		'angular-jwt',
 		'oc.lazyLoad',
-		'ngMaterial',
 		'ngMessages',
 		'factories',
 		'loginmodule',
 		'homemodule',
 		'iniciomodule',
-		'ngMdIcons'
+		'ui.materialize'
 	]);
 
 	var config = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider) {
@@ -24,7 +23,7 @@
 					if (token && !jwtHelper.isTokenExpired(token)) {
 						console.log("Is valid and is not expired");
 						conf.headers.Authorization = 'Bearer ' + token;
-						$location.path("/inicio");
+						$location.path("/home");
 					} else {
 						localStorage.removeItem('token');
 						$location.path("/login");
