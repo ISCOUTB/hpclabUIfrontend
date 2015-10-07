@@ -22,7 +22,6 @@
 					var token = localStorage.getItem('token');
 					if (token && !jwtHelper.isTokenExpired(token)) {
 						conf.headers.Authorization = 'Bearer ' + token;
-						$location.path("/home");
 					} else {
 						localStorage.removeItem('token');
 						$location.path("/login");

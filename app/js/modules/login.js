@@ -9,7 +9,10 @@
                         jwt_loginService.login(user).then(function (result) {
                                 var token = result.data.token;
                                 localStorage.setItem('token', token);
-                                $location.path('/home');
+                                $location.path('/inicio');
+                        },function(){
+                                $scope.user.password = null;
+                                Materialize.toast('Error de autenticación. Verifique los datos.', 4000, 'rounded');
                         });
                 }
         });
