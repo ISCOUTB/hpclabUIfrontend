@@ -1,4 +1,5 @@
 /.idea
 /.brackets.json
 /app/bower_components
+/app/css/main.css
 /node_modules
