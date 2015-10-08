@@ -32,7 +32,7 @@
 		}
 	]);
 
-	factories.factory('Auth', ['$http', function ($http) {
+	factories.factory('Auth', ['$http', 'jwtHelper', function ($http, jwtHelper) {
 		function getClaimsFromToken() {
 			var token = localStorage.getItem('token');
 			var user = {};
@@ -64,8 +64,8 @@
 
 	factories.factory('getServerName', function () {
 		//return 'http://0.0.0.0:9000';
-		return 'http://172.16.9.152:9000';
-		//return 'https://api.hpclab.unitecnologica.edu.co';
+		//return 'http://172.16.9.152:9000';
+		return 'https://api.hpclab.unitecnologica.edu.co';
 	});
 
 })();

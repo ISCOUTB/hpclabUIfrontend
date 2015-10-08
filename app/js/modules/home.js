@@ -68,13 +68,13 @@
                                         });
                                 }
                         }
-                }
+                };
 
                 $scope.deleteFile = function (id) {
-                        requestService.deleteFile(id).then(function (result){
+                        requestService.deleteFile(id).then(function (result) {
                                 console.log("ha sido eliminada");
                         })
-                }
+                };
 
         });
 
@@ -163,11 +163,11 @@
                         });
                 };
 
-                requestSvc.deleteFile = function(id){
+                requestSvc.deleteFile = function (id) {
                         return $http({
                                 method: "DELETE",
                                 skipAuthorization: false,
-                                url: getServerName + '/files/' + id  + '/'
+                                url: getServerName + '/files/' + id + '/'
                         })
                 };
 

@@ -29,3 +29,8 @@
 .dragover {
     border: 5px dashed blue;
 }
+
+.card .card-content {
+    padding: 5px 20px 5px 20px;
+    border-radius: 0;
+}
