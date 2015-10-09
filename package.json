@@ -19,6 +19,7 @@
     "gulp-stylus": "^2.1.0"
   },
   "devDependencies": {
-    "gulp-bower": "0.0.10"
+    "gulp-bower": "0.0.10",
+    "gulp-stylus": "^2.1.0"
   }
 }
