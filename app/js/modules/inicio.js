@@ -26,7 +26,7 @@
                 $scope.createProject = function (project) {
                         requestService.createProject(project).then(function (result) {
                                 $scope.projects.push(result.data);
-                                $scope.project = [];
+                                $scope.project = {};
                                 $scope.ProjectForm.$setPristine();
                                 $scope.ProjectForm.$setUntouched();
                         });
@@ -36,7 +36,6 @@
                         var parentID = $event.target.parentElement;
                         requestService.deleteProject(id).then(function (result) {
                                 parentID.remove();
-                                console.log("ha sido eliminado");
 
                         })
                 };
