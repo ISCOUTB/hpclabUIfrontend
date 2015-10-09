@@ -1,3 +1,8 @@
+body {
+   overflow-x: hidden;
+   background-color: #f1f2f7;
+}
+
 .automargin {
    margin: auto;
    position: relative;
@@ -35,33 +40,149 @@
    border-radius: 0;
 }
 
+.logo {
+   width: 240px;
+   background: #19b698;
+   float: left;
+   height: 64px;
+}
+
 .hpc-logo {
    width: 100px;
    cursor: pointer;
+   float: left;
+   margin-top: 14px;
+   margin-left: 20px;
 }
 
 .lista-proyectos {
    background-color: #32323a;
    border-bottom: 1px solid #38383e;
+   width: 100%;
 }
 
 .lista-proyectos > i {
-   height: 56px;
-   line-height: 56px;
+   height: 50px;
+   line-height: 50px;
    cursor: pointer;
    color: #636365;
+   font-size: 20px;
+}
+
+.btn-delete {
+   float: right;
+   display: block;
 }
 
 .lista-proyectos > a {
-   height: 56px;
-   line-height: 56px;
+   height: 50px;
+   line-height: 50px;
    color: #a5a5a5 !important;
+   text-transform: uppercase;
 }
 
 .lista-proyectos:hover {
    background-color: #28282e !important;
 }
 
+.limp {
+   line-height: 17;
+   clear: both;
+}
+
 .lista-proyectos .activate {
    background-color: #28282e !important;
+}
+
+.contenedor-principal {
+   margin-left: 240px;
+   position: absolute;
+   top: 64px;
+   width: 100%;
+   overflow-x: hidden;
+}
+
+.config-proyecto {
+   background: #ffffff;
+   border-radius: 4px;
+   padding: 10px 20px;
+   box-sizing: border-box;
+   width: 500px;
+}
+
+.grand-icono {
+   height: 70px;
+   width: 70px;
+   display: block;
+   background-color: #dfdfdf;
+   border-radius: 50%;
+   text-align: center;
+   color: #a1a1a4;
+   font-size: 35px;
+   box-sizing: border-box;
+   padding: 13px;
+   border: 4px solid #f1f2f7;
+}
+
+.margen {
+   padding: 20px;
+}
+
+.side-nav {
+   top: 64px;
+}
+
+.top-nav {
+   position: fixed;
+   z-index: 10;
+}
+
+.btn-run {
+   display: block;
+   border-radius: 4px;
+   color: #fff;
+   background-color: #19b698;
+   text-align: center;
+   margin-top: 10px;
+}
+
+.btn-delete {
+   display: block;
+   border-radius: 4px;
+   color: #fff;
+   background-color: #E57373;
+   text-align: center;
+   margin-top: 10px;
+   width: 70px;
+}
+
+.btn-delete > i {
+   font-size: 19px;
+   position: relative;
+   top: 3px;
+}
+
+.btn-run:hover {}
+
+.titulo-proyecto {
+   color: #19b698;
+   font: 900 24px 'Roboto';
+   margin: 0;
+}
+
+.nombre-autor {
+   color: #a1a1a4;
+   font: 300 15px 'Roboto';
+}
+
+.cont-info-proyecto {
+   float: right;
+   width: 360px;
+}
+
+.descripcion {
+   margin: 0;
+   color: #aaadad;
+   font: 300 15px 'Roboto';
+   text-align: justify;
 }

@@ -1,5 +1,9 @@
 <header>
    <nav class="top-nav">
+      <div class="logo">
+         <img src="../images/logo.png" class="hpc-logo"/>
+         <div class="limp"></div>
+      </div>
       <ul class="right">
          <li>
             <a class="dropdown-button btn" href="#" data-beloworigin="true" data-activates="userDropdown" dropdown data-hover="true">
@@ -17,6 +21,7 @@
          <li class="divider"></li>
          <li><a ng-click="logout()">Cerrar sesión</a></li>
       </ul>
+
    </nav>
    <div id="editModal" class="modal" style="width: 25%;">
       <div class="modal-content">
@@ -65,24 +70,37 @@
          </button>
       </div>
    </div>
-   <div class="container">
-      <a href="#" data-activates="nav-mobile" class="button-collapse top-nav ng-isolate-scope" data-sidenav="left" data-closeonclick="false"><i class="mdi-navigation-menu"></i></a>
-   </div>
+
    <ul id="nav-mobile" class="side-nav fixed">
-      <li class="logo">
-         <h3><img src="../images/logo.png" class="hpc-logo"></h3>
-      </li>
+
       <li class="proyectos">
          <a href="#newProjectModal" class="waves-effect waves-light btn" modal>
             <i class="material-icons left">settings_applications</i> Proyectos
             <i class="material-icons right">add</i>
          </a>
       </li>
-      <ul>
-         <li ng-repeat="project in projects" class="lista-proyectos">
-            <i class="material-icons left">folder</i>
-            <a href="#">{{project.name}}</a>
+      <ul class="">
+         <li ng-repeat="project in projects" class="lista-proyectos waves-effect">
+            <i class="material-icons left">book</i>
+            <a href="#" class="truncate">{{project.name}}</a>
          </li>
       </ul>
    </ul>
 </header>
+<section class="contenedor-principal">
+   <div class="margen">
+      <div class="config-proyecto">
+         <div class="left">
+            <i class="material-icons grand-icono">book</i>
+            <a href="#" class="btn-run">Run</a>
+            <a href="#" class="btn-delete"> <i class="material-icons">delete</i></a>
+         </div>
+         <div class="right cont-info-proyecto">
+            <h3 class="titulo-proyecto">HPC test</h3>
+            <label class="nombre-autor">Juan leguizamon</label>
+            <p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. enean porttitor vestibulum imperdiet. Ut auctor accums an erat, a vulputate metus tristique non. Aliquam aliquam vel orci quis sagittis.</p>
+         </div>
+         <div class="limp"></div>
+      </div>
+   </div>
+</section>
