@@ -1,41 +1,67 @@
 .automargin {
-    margin: auto;
-    position: relative;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+   margin: auto;
+   position: relative;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
 }
 
 .center {
-    text-align: center;
+   text-align: center;
 }
 
 .alert {
-    background-color: #f44336;
-    color: #fff;
+   background-color: #f44336;
+   color: #fff;
 }
 
 .right {
-    float: right;
+   float: right;
 }
 
 .drop-box {
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
-    height: 50%;
+   background: #F8F8F8;
+   border: 5px dashed #DDD;
+   height: 50%;
 }
 
 .dragover {
-    border: 5px dashed blue;
+   border: 5px dashed blue;
 }
 
 .card .card-content {
-    padding: 5px 20px 5px 20px;
-    border-radius: 0;
+   padding: 5px 20px 5px 20px;
+   border-radius: 0;
 }
 
-.hpc-logo{
+.hpc-logo {
    width: 100px;
    cursor: pointer;
+}
+
+.lista-proyectos {
+   background-color: #32323a;
+   border-bottom: 1px solid #38383e;
+}
+
+.lista-proyectos > i {
+   height: 56px;
+   line-height: 56px;
+   cursor: pointer;
+   color: #636365;
+}
+
+.lista-proyectos > a {
+   height: 56px;
+   line-height: 56px;
+   color: #a5a5a5 !important;
+}
+
+.lista-proyectos:hover {
+   background-color: #28282e !important;
+}
+
+.lista-proyectos .activate {
+   background-color: #28282e !important;
 }
