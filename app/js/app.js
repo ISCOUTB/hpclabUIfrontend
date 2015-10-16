@@ -46,6 +46,11 @@
 				url         : '/inicio',
 				templateUrl : 'views/inicio.html',
 				controller  : 'InicioController'
+			})
+			.state('admin', {
+				url: '/admin',
+				templateUrl: 'views/admin.html',
+				controller: 'InicioController'
 			});
 
 		$urlRouterProvider.otherwise("/login");

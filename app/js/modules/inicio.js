@@ -9,13 +9,19 @@
                         $scope.user = result.data;
                 });
 
+                $scope.editingProject = null;
+
                 $scope.copyUser = function () {
                         $scope.uUser = angular.copy($scope.user);
                 };
 
+                $(".button-collapse").sideNav();
+
                 $scope.updateUser = function (user) {
                         requestService.updateUser(user).then(function (result) {
                                 $scope.user = result.data;
+                                $("#editUserModal").closeModal();
+                                Materialize.toast('Edición de usuario exitosa.', 4000, 'rounded');
                         });
                 };
 
@@ -29,15 +35,26 @@
                                 $scope.project = {};
                                 $scope.ProjectForm.$setPristine();
                                 $scope.ProjectForm.$setUntouched();
+                                $("#newProjectModal").closeModal();
                         });
                 };
 
-                $scope.deleteProject = function ($event, id) {
-                        var parentID = $event.target.parentElement;
-                        requestService.deleteProject(id).then(function (result) {
-                                parentID.remove();
+                $scope.getProject = function (id, index) {
+                        requestService.getProject(id).then(function (result) {
+                                $scope.editingProject = result.data;
+                                $scope.editingProject["index"] = index;
+                        });
+                };
 
-                        })
+                $scope.deleteProject = function (project) {
+                        requestService.deleteProject(project["id"]).then(function (result) {
+                                $scope.projects.splice(project["index"], 1);
+                                $scope.editingProject = null;
+                                Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
+
+                        }, function () {
+                                Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
+                        });
                 };
 
                 requestService.getFiles().then(function (result) {
@@ -105,6 +122,14 @@
                                 skipAuthorization: false,
                                 url: getServerName + '/projects/',
                                 data: project
+                        })
+                };
+
+                requestSvc.getProject = function (id) {
+                        return $http({
+                                method: "GET",
+                                skipAuthorization: false,
+                                url: getServerName + '/projects/' + id + '/'
                         })
                 };
 

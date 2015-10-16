@@ -1,106 +1,166 @@
 <header>
-   <nav class="top-nav">
-      <div class="logo">
-         <img src="../images/logo.png" class="hpc-logo"/>
-         <div class="limp"></div>
-      </div>
-      <ul class="right">
-         <li>
-            <a class="dropdown-button btn" href="#" data-beloworigin="true" data-activates="userDropdown" dropdown data-hover="true">
-               <div ng-show="user.first_name == ''">
-                  {{user.username}}
-               </div>
-               <div ng-show="user.first_name != ''">
-                  {{user.first_name}}
-               </div>
-            </a>
-         </li>
-      </ul>
-      <ul id="userDropdown" class="dropdown-content">
-         <li><a href="#editModal" ng-click="copyUser()" modal>Editar</a></li>
-         <li class="divider"></li>
-         <li><a ng-click="logout()">Cerrar sesión</a></li>
-      </ul>
-
-   </nav>
-   <div id="editModal" class="modal" style="width: 25%;">
-      <div class="modal-content">
-         <h4>Edición de usuario</h4>
-
-         <form name="UserForm" novalidate>
-            <input type="hidden" name="id" ng-model="uUser.id" value="{{user.id}}">
-            <input type="hidden" name="username" ng-model="uUser.username" value="{{user.username}}">
-
-            <div class="input-field">
-               <label for="first_name">Nombres</label>
-               <input class="validate" name="first_name" type="text" id="first_name" ng-required="true" ng-model="uUser.first_name">
+    <nav class="top-nav">
+        <div>
+            <div class="nav-wrapper">
+                <ul class="right">
+                    <li>
+                        <a class="dropdown-button btn" href="#" data-beloworigin="true" data-activates="userDropdown"
+                           dropdown
+                           data-hover="true">
+                            <div ng-show="user.first_name == ''">
+                                {{user.username}}
+                            </div>
+                            <div ng-show="user.first_name != ''">
+                                {{user.first_name}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul id="userDropdown" class="dropdown-content">
+                    <li><a href="#editUserModal" ng-click="copyUser()" modal>Editar</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="logout()">Cerrar sesión</a></li>
+                </ul>
             </div>
-            <div class="input-field">
-               <label for="last_name">Apellidos</label>
-               <input name="last_name" type="text" id="last_name" ng-required="true" ng-model="uUser.last_name">
-            </div>
-            <div class="input-field">
-               <label for="email">Email</label>
-               <input name="email" id="email" type="email" ng-required="true" ng-model="uUser.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-            </div>
-         </form>
-      </div>
-      <div class="modal-fixed-footer center-align">
-         <button class="btn waves-effect waves-light" ng-disabled="UserForm.$invalid || UserForm.$pristine" ng-click="updateUser(uUser)">Editar
-         </button>
-      </div>
-   </div>
-   <div id="newProjectModal" class="modal" style="width: 25%;">
-      <div class="modal-content">
-         <h4>Nuevo proyecto</h4>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="hide-on-large-only">
+            <a href="#" data-activates="slide-out" class="button-collapse top-nav"><i
+                    class="medium material-icons">menu</i></a>
+        </div>
+        <ul id="slide-out" class="side-nav fixed">
+            <li class="logo">
+                <a id="logo-container" href="#" class="brand-logo">
+                    <img src="../images/logo.png" class="hpc-logo"/>
+                </a>
+            </li>
+            <li class="proyectos">
+                <a href="#newProjectModal" class="waves-effect waves-light btn" modal>
+                    <i class="material-icons left">settings_applications</i> Proyectos
+                    <i class="material-icons right">add</i>
+                </a>
+            </li>
+            <li ng-repeat="project in projects" class="projects-list waves-effect">
+                <i class="material-icons left">book</i>
+                <a href="#" ng-click="getProject(project.id, $index)" class="truncate">{{project.name}}</a>
+            </li>
+            <li class="divider"></li>
+            <li class="proyectos">
+                <a href="#myFiles" class="waves-effect waves-light btn modal-trigger" modal>
+                    <i class="material-icons left">attachment</i> Archivos
+                </a>
+            </li>
+        </ul>
+        <div id="editUserModal" class="modal">
+            <div class="modal-content">
+                <h4>Edición de usuario</h4>
 
-         <form name="ProjectForm" novalidate>
-            <div class="input-field">
-               <label for="name">Nombre</label>
-               <input name="name" type="text" id="name" ng-required="true" ng-model="project.name">
-            </div>
-            <div class="input-field">
-               <label for="description">Descripción</label>
-               <textarea class="materialize-textarea" name="description" id="description" ng-model="project.description" md-maxlength="140"></textarea>
-            </div>
-         </form>
-      </div>
-      <div class="modal-fixed-footer center-align">
-         <button class="btn waves-effect waves-light" ng-disabled="ProjectForm.$invalid || ProjectForm.$pristine" ng-click="createProject(project)">Guardar
-         </button>
-      </div>
-   </div>
+                <form name="UserForm" novalidate>
+                    <input type="hidden" name="id" ng-model="uUser.id" value="{{user.id}}">
+                    <input type="hidden" name="username" ng-model="uUser.username" value="{{user.username}}">
 
-   <ul id="nav-mobile" class="side-nav fixed">
+                    <div class="input-field">
+                        <label for="first_name">Nombres</label>
+                        <input class="validate" name="first_name" type="text" id="first_name" ng-required="true"
+                               ng-model="uUser.first_name">
+                    </div>
+                    <div class="input-field">
+                        <label for="last_name">Apellidos</label>
+                        <input name="last_name" type="text" id="last_name" ng-required="true"
+                               ng-model="uUser.last_name">
+                    </div>
+                    <div class="input-field">
+                        <label for="email">Email</label>
+                        <input name="email" id="email" type="email" ng-required="true" ng-model="uUser.email"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-fixed-footer center-align">
+                <button class="btn waves-effect waves-light" ng-disabled="UserForm.$invalid || UserForm.$pristine"
+                        ng-click="updateUser(uUser)">Editar
+                </button>
+            </div>
+        </div>
+        <div id="newProjectModal" class="modal">
+            <div class="modal-content">
+                <h4>Nuevo proyecto</h4>
 
-      <li class="proyectos">
-         <a href="#newProjectModal" class="waves-effect waves-light btn" modal>
-            <i class="material-icons left">settings_applications</i> Proyectos
-            <i class="material-icons right">add</i>
-         </a>
-      </li>
-      <ul class="">
-         <li ng-repeat="project in projects" class="lista-proyectos waves-effect">
-            <i class="material-icons left">book</i>
-            <a href="#" class="truncate">{{project.name}}</a>
-         </li>
-      </ul>
-   </ul>
+                <form name="ProjectForm" novalidate>
+                    <div class="input-field">
+                        <label for="name">Nombre</label>
+                        <input name="name" type="text" id="name" ng-required="true" ng-model="project.name">
+                    </div>
+                    <div class="input-field">
+                        <label for="description">Descripción</label>
+                    <textarea class="materialize-textarea" name="description" id="description"
+                              ng-model="project.description" md-maxlength="140"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-fixed-footer center-align">
+                <button class="btn waves-effect waves-light" ng-disabled="ProjectForm.$invalid || ProjectForm.$pristine"
+                        ng-click="createProject(project)">Guardar
+                </button>
+            </div>
+        </div>
+        <div id="myFiles" class="modal bottom-sheet">
+            <div class="modal-content">
+                <h4>Mis archivos</h4>
+
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
+    </div>
 </header>
-<section class="contenedor-principal">
-   <div class="margen">
-      <div class="config-proyecto">
-         <div class="left">
-            <i class="material-icons grand-icono">book</i>
-            <a href="#" class="btn-run">Run</a>
-            <a href="#" class="btn-delete"> <i class="material-icons">delete</i></a>
-         </div>
-         <div class="right cont-info-proyecto">
-            <h3 class="titulo-proyecto">HPC test</h3>
-            <label class="nombre-autor">Juan leguizamon</label>
-            <p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. enean porttitor vestibulum imperdiet. Ut auctor accums an erat, a vulputate metus tristique non. Aliquam aliquam vel orci quis sagittis.</p>
-         </div>
-         <div class="limp"></div>
-      </div>
-   </div>
-</section>
+<main>
+    <div class="fixed-container" style="border-collapse: collapse;">
+        <div class="row">
+            <div class="col s12 m9 l10" style="margin-top: 84px;">
+                <div ng-show="editingProject != null">
+                    <div class="fixed-action-btn">
+                        <a class="btn-floating btn-large" style="background-color: #19B597;">
+                            <i class="large material-icons">settings</i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a ng-click="deleteProject(editingProject)" class="btn-floating red">
+                                    <i class="material-icons">
+                                        delete
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="btn-floating blue">
+                                    <i class="material-icons">
+                                        mode_edit
+                                    </i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="btn-floating green">
+                                    <i class="material-icons">
+                                        play_arrow
+                                    </i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="card-panel">
+                        <h4 class="project-title">{{editingProject.name}}</h4>
+                        <label class="nombre-autor" style="margin-top: -15px;">{{editingProject.created_at | date: '' :
+                            timezone}}</label>
+
+                        <p>{{editingProject.description}}</p>
+                    </div>
+                    <div class="limp"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
