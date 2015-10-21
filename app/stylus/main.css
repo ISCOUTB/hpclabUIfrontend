@@ -76,7 +76,13 @@
   line-height: 17;
   clear: both;
 }
-.project-title {
+.card-panel {
+  padding: 20px 20px 10px 20px;
+}
+.card-panel .project-title {
   font-size: 1.5rem;
   margin: 0 0 0 0;
+}
+.card-panel .project-description {
+  margin: 0 0 10px 0;
 }

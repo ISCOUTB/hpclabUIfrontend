@@ -19,7 +19,6 @@
 		$httpProvider.interceptors.push(function ($location, $q, $rootScope, jwtHelper) {
 			return {
 				request : function (conf) {
-					$rootScope.processing = true;
 					var token = localStorage.getItem('token');
 					if (token && !jwtHelper.isTokenExpired(token)) {
 						conf.headers.Authorization = 'Bearer ' + token;
@@ -34,9 +33,18 @@
 
 		$stateProvider
 			.state('login', {
+				cache: false,
 				url         : '/login',
 				templateUrl : '/views/login.html',
-				controller  : 'loginController'
+				controller  : 'loginController',
+				resolve: {
+					verifyToken: function($location, jwtHelper){
+						var token = localStorage.getItem('token');
+						if (token && !jwtHelper.isTokenExpired(token)) {
+							$location.path("/home");
+						}
+					}
+				}
 			})
 			.state('home', {
 				url         : '/home',
