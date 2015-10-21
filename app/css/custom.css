@@ -3,114 +3,8 @@ body {
    background-color: #f1f2f7;
 }
 
-.automargin {
-   margin: auto;
-   position: relative;
-   top: 0;
-   left: 0;
-   bottom: 0;
-   right: 0;
-}
-
 .center {
    text-align: center;
-}
-
-.top-nav {
-    position: relative;
-}
-
-.alert {
-   background-color: #f44336;
-   color: #fff;
-}
-
-.drop-box {
-   background: #F8F8F8;
-   border: 5px dashed #DDD;
-   height: 50%;
-}
-
-.dragover {
-   border: 5px dashed blue;
-}
-
-.card .card-content {
-   padding: 5px 20px 5px 20px;
-   border-radius: 0;
-}
-
-.hpc-logo {
-    width: 100%;
-   cursor: pointer;
-    display: block;
-    margin: 0 auto;
-}
-
-.brand-logo {
-    width: 100%;
-    position: relative;
-    background-color: transparent;
-}
-
-.projects-list {
-   background-color: #32323a;
-   border-bottom: 1px solid #38383e;
-   width: 100%;
-}
-
-.projects-list > i {
-   height: 50px;
-   line-height: 50px;
-   cursor: pointer;
-   color: #636365;
-   font-size: 20px;
-}
-
-.btn-delete {
-   float: right;
-   display: block;
-}
-
-.projects-list > a {
-   height: 50px;
-   line-height: 50px;
-   color: #a5a5a5 !important;
-   text-transform: uppercase;
-}
-
-.projects-list:hover {
-   background-color: #28282e !important;
-}
-
-.limp {
-   line-height: 17;
-   clear: both;
-}
-
-.projects-list .activate {
-   background-color: #28282e !important;
-}
-
-.contenedor-principal {
-   position: absolute;
-   top: 64px;
-   width: 100%;
-   overflow-x: hidden;
-}
-
-.margen {
-   padding: 20px;
-}
-
-.top-nav {
-   position: fixed;
-   z-index: 10;
-}
-
-.project-title {
-    font-size: 1.5rem;
-    margin: 0 0 0 0;
 }
 
 @media screen and (min-width: 993px) {
@@ -123,4 +17,37 @@ body {
     .fixed-container {
         margin-left: 20px;
     }
+}
+
+.animate-enter,
+.animate-leave {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+    -webkit-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    transform: scaleY(0);
+    height: 0px;
+    opacity: 0;
+}
+
+.animate-enter.animate-enter-active,
+.animate-leave {
+    -webkit-transform: scaleY(1);
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    transform: scaleY(1);
+    height: 30px;
+    opacity: 1;
 }

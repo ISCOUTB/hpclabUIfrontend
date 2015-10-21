@@ -1,21 +1,75 @@
 .top-nav
   background-color #FDFDFD
+  position fixed
+  z-index 10
   ul
+    li
+      a
+        min-width 200px
     li:hover
       background-color transparent
+
 
 .side-nav
   background-color #32323A
   .logo
+    &:hover
+      background #1E8A80
+    .brand-logo
+      position relative
+      background-color transparent
+      .hpc-logo
+        width 70%
+        cursor pointer
+        display block
+        margin 0 auto
+        position relative
+        top 10px
     h3
       color white
       margin 0
       padding-bottom 8px
       padding-top 8px
     background-color #19B597
-  .proyectos
+  .projects
     padding 0
     a
       background-color #28282E
       border-radius 0
       color #19B597
+
+.card
+  .card-content
+    padding 5px 20px 5px 20px
+    border-radius 0
+
+
+
+
+.projects-list
+  background-color #32323a
+  border-bottom 1px solid #38383e
+  width 100%
+  i
+    height 50px
+    line-height 50px
+    cursor pointer
+    color #636365
+    font-size 20px
+  a
+    height 50px
+    line-height 50px
+    color #a5a5a5 !important
+    text-transform uppercase
+  &:hover
+    background-color #28282e !important
+  .activate
+    background-color #28282e !important
+
+.limp
+  line-height 17
+  clear both
+
+.project-title
+  font-size 1.5rem
+  margin 0 0 0 0

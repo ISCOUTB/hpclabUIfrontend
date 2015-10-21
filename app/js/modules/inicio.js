@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-        var home = angular.module('iniciomodule', ['ngFileUpload']);
+        var home = angular.module('homemodule', ['ngFileUpload']);
 
-        home.controller('InicioController', function ($scope, requestService, Auth, $location) {
+        home.controller('HomeController', function ($scope, homeService, Auth, $location) {
 
-                requestService.getUser().then(function (result) {
+                homeService.getUser().then(function (result) {
                         $scope.user = result.data;
                 });
 
@@ -18,19 +18,19 @@
                 $(".button-collapse").sideNav();
 
                 $scope.updateUser = function (user) {
-                        requestService.updateUser(user).then(function (result) {
+                        homeService.updateUser(user).then(function (result) {
                                 $scope.user = result.data;
                                 $("#editUserModal").closeModal();
                                 Materialize.toast('Edición de usuario exitosa.', 4000, 'rounded');
                         });
                 };
 
-                requestService.getProjects().then(function (result) {
+                homeService.getProjects().then(function (result) {
                         $scope.projects = result.data;
                 });
 
                 $scope.createProject = function (project) {
-                        requestService.createProject(project).then(function (result) {
+                        homeService.createProject(project).then(function (result) {
                                 $scope.projects.push(result.data);
                                 $scope.project = {};
                                 $scope.ProjectForm.$setPristine();
@@ -40,14 +40,14 @@
                 };
 
                 $scope.getProject = function (id, index) {
-                        requestService.getProject(id).then(function (result) {
+                        homeService.getProject(id).then(function (result) {
                                 $scope.editingProject = result.data;
                                 $scope.editingProject["index"] = index;
                         });
                 };
 
                 $scope.deleteProject = function (project) {
-                        requestService.deleteProject(project["id"]).then(function (result) {
+                        homeService.deleteProject(project["id"]).then(function (result) {
                                 $scope.projects.splice(project["index"], 1);
                                 $scope.editingProject = null;
                                 Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
@@ -57,7 +57,7 @@
                         });
                 };
 
-                requestService.getFiles().then(function (result) {
+                homeService.getFiles().then(function (result) {
                         $scope.datafiles = result.data;
                 });
 
@@ -69,7 +69,7 @@
                         if (files && files.length) {
                                 for (var i = 0; i < files.length; i++) {
                                         var file = files[i];
-                                        requestService.createFile(file).progress(function (evt) {
+                                        homeService.createFile(file).progress(function (evt) {
                                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                                                 console.log('progress: ' + progressPercentage + '% ');
                                         }).success(function (response) {
@@ -87,7 +87,7 @@
 
         });
 
-        home.service('requestService', function ($http, getServerName, Upload) {
+        home.service('homeService', function ($http, getServerName, Upload) {
 
                 var requestSvc = {};
 
@@ -125,21 +125,21 @@
                         })
                 };
 
-                requestSvc.getProject = function (id) {
-                        return $http({
-                                method: "GET",
-                                skipAuthorization: false,
-                                url: getServerName + '/projects/' + id + '/'
-                        })
-                };
+                //requestSvc.getProject = function (id) {
+                //        return $http({
+                //                method: "GET",
+                //                skipAuthorization: false,
+                //                url: getServerName + '/projects/' + id + '/'
+                //        })
+                //};
 
-                requestSvc.deleteProject = function (id) {
-                        return $http({
-                                method: "DELETE",
-                                skipAuthorization: false,
-                                url: getServerName + '/projects/' + id + '/'
-                        })
-                };
+                //requestSvc.deleteProject = function (id) {
+                //        return $http({
+                //                method: "DELETE",
+                //                skipAuthorization: false,
+                //                url: getServerName + '/projects/' + id + '/'
+                //        })
+                //};
 
                 requestSvc.getFiles = function () {
                         return $http({

@@ -1,0 +1,38 @@
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large" style="background-color: #19B597;">
+        <i class="large material-icons">settings</i>
+    </a>
+    <ul>
+        <li>
+            <a ng-click="deleteProject(editingProject)" class="btn-floating red">
+                <i class="material-icons">
+                    delete
+                </i>
+            </a>
+        </li>
+        <li>
+            <a class="btn-floating blue">
+                <i class="material-icons">
+                    mode_edit
+                </i>
+            </a>
+        </li>
+        <li>
+            <a class="btn-floating green">
+                <i class="material-icons">
+                    play_arrow
+                </i>
+            </a>
+        </li>
+
+    </ul>
+</div>
+<div class="card-panel">
+    <h4 class="project-title">{{editingProject.name}}</h4>
+    <label class="nombre-autor" style="margin-top: -15px;">{{editingProject.created_at | date: '' :
+        timezone}}</label>
+
+    <p>{{editingProject.description}}</p>
+</div>
+<div class="limp"></div>

@@ -9,8 +9,9 @@
 		'factories',
 		'loginmodule',
 		'homemodule',
-		'iniciomodule',
-		'ui.materialize'
+		'projectmodule',
+		'ui.materialize',
+		'ngAnimate'
 	]);
 
 	var config = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider) {
@@ -34,24 +35,34 @@
 		$stateProvider
 			.state('login', {
 				url         : '/login',
-				templateUrl : 'views/login.html',
+				templateUrl : '/views/login.html',
 				controller  : 'loginController'
 			})
 			.state('home', {
 				url         : '/home',
-				templateUrl : 'views/home.html',
+				templateUrl : '/views/home.html',
 				controller  : 'HomeController'
-			})
-			.state('inicio', {
-				url         : '/inicio',
-				templateUrl : 'views/inicio.html',
-				controller  : 'InicioController'
 			})
 			.state('admin', {
 				url: '/admin',
 				templateUrl: 'views/admin.html',
 				controller: 'InicioController'
-			});
+			})
+			.state('home.project',{
+				url: '/project/:projectID',
+				templateUrl: '/views/projectDetail.html',
+				controller: 'ProjectController',
+				onEnter: function($state, $stateParams){
+					if(!$stateParams.projectID){
+						$state.transitionTo('home')
+					}
+				}
+			})
+                        .state('home.files',{
+                                url: '/files',
+                                templateUrl: '/views/files.html'
+                        });
+
 
 		$urlRouterProvider.otherwise("/login");
 

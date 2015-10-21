@@ -1,0 +1,15 @@
+<div flex="33" flex-order-gt-sm="3">
+    <md-content class="md-padding">
+        <md-card ngf-drop="uploadFiles($files)" ng-model="files" ngf-drag-over-class="dragover" ngf-multiple="true"
+                 class="drop-box upload-files" ngf-max-size="20MB">
+            <md-card-content>
+                <p>Drag and drop files here.</p>
+                <ul>
+                    <li ng-repeat="file in datafiles">
+                        <p>{{file.filename}}</p>
+                    </li>
+                </ul>
+            </md-card-content>
+        </md-card>
+    </md-content>
+</div>
