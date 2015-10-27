@@ -1,13 +1,3 @@
-'use strict';
-
-var filesmodule=angular.module('filemodule',[]);
-
-filesmodule.service('schemaFile', function () {
-   
-   var file={};
-   
-   
-   
-   
-   return null;
-});
+/**
+ * Created by juan on 23/10/15.
+ */
