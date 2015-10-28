@@ -1,15 +1,13 @@
 'use strict';
 
 (function () {
-        var home = angular.module('homemodule', ['ngFileUpload']);
+        var home = angular.module('homemodule', []);
 
-        home.controller('HomeController', function ($scope, homeService, Auth, $location) {
+        home.controller('HomeController', function ($scope, $rootScope, homeService, Auth, $location) {
 
                 homeService.getUser().then(function (result) {
                         $scope.user = result.data;
                 });
-
-                $scope.editingProject = null;
 
                 $scope.copyUser = function () {
                         $scope.uUser = angular.copy($scope.user);
@@ -39,11 +37,8 @@
                         });
                 };
 
-                $scope.getProject = function (id, index) {
-                        homeService.getProject(id).then(function (result) {
-                                $scope.editingProject = result.data;
-                                $scope.editingProject["index"] = index;
-                        });
+                $scope.printIndex = function (id){
+                        $scope.editingProjectIndex = id;
                 };
 
                 $scope.deleteProject = function (project) {
@@ -55,28 +50,6 @@
                         }, function () {
                                 Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
                         });
-                };
-
-                homeService.getFiles().then(function (result) {
-                        $scope.datafiles = result.data;
-                });
-
-                $scope.$watch('files', function () {
-                        $scope.upload($scope.files)
-                });
-
-                $scope.upload = function (files) {
-                        if (files && files.length) {
-                                for (var i = 0; i < files.length; i++) {
-                                        var file = files[i];
-                                        homeService.createFile(file).progress(function (evt) {
-                                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                                                console.log('progress: ' + progressPercentage + '% ');
-                                        }).success(function (response) {
-                                                $scope.datafiles.push(response);
-                                        });
-                                }
-                        }
                 };
 
                 $scope.logout = function () {
@@ -123,44 +96,6 @@
                                 url: getServerName + '/projects/',
                                 data: project
                         })
-                };
-
-                //requestSvc.getProject = function (id) {
-                //        return $http({
-                //                method: "GET",
-                //                skipAuthorization: false,
-                //                url: getServerName + '/projects/' + id + '/'
-                //        })
-                //};
-
-                //requestSvc.deleteProject = function (id) {
-                //        return $http({
-                //                method: "DELETE",
-                //                skipAuthorization: false,
-                //                url: getServerName + '/projects/' + id + '/'
-                //        })
-                //};
-
-                requestSvc.getFiles = function () {
-                        return $http({
-                                method: "GET",
-                                skipAuthorization: false,
-                                url: getServerName + "/files/"
-                        })
-                };
-
-                requestSvc.createFile = function (file) {
-                        return Upload.upload({
-                                method: "POST",
-                                skipAuthorization: false,
-                                url: getServerName + "/files/",
-                                data: {
-                                        file: file,
-                                        filename: file.name,
-                                        size: file.size,
-                                        type: file.type
-                                }
-                        });
                 };
 
                 return requestSvc;

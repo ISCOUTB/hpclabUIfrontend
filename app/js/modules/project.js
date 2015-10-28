@@ -5,11 +5,31 @@
 'use strict';
 
 (function () {
-        var project = angular.module('projectmodule', []);
 
-        project.controller('ProjectController', function ($scope, projectService, $stateParams, $state, $location) {
+        var project = angular.module('projectmodule', ['homemodule']);
+
+        project.controller('ProjectController', function ($scope, $rootScope, homeService, projectService, $stateParams, $state, $location) {
 
                 var projectID = $stateParams.projectID;
+
+                function arrayObjectIndexOf(arr, obj) {
+                        for (var i = 0; i < arr.length; i++) {
+                                if (angular.equals(arr[i], obj)) {
+                                        return i;
+                                }
+                        }
+                        return -1;
+                }
+
+                function getIndex() {
+                        var index = -1;
+                        if ($scope.editingProjectIndex) {
+                                index = $scope.editingProjectIndex;
+                        } else {
+                                index = arrayObjectIndexOf($scope.$parent.projects, $scope.editingProject);
+                        }
+                        return index;
+                }
 
                 projectService.getProject(projectID).then(function (result) {
                         $scope.editingProject = result.data;
@@ -28,17 +48,19 @@
                 });
 
                 $scope.deleteProject = function () {
-                        projectService.deleteProject(projectID).then(function (result) {
-                                //$scope.projects.splice(project["index"], 1);
-                                $scope.editingProject = null;
-                                Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
-                                //$state.transitionTo('home');
-                                $location.path('/home');
-                        }, function () {
-                                Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
-                        });
+                        if (confirm('Está seguro?')){
+                                projectService.deleteProject(projectID).then(function (result) {
+                                        var index = getIndex();
+                                        $scope.projects.splice(index, 1);
+                                        $scope.editingProject = null;
+                                        $scope.editingProjectIndex = null;
+                                        $state.transitionTo('home');
+                                        Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
+                                }, function () {
+                                        Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
+                                });
+                        }
                 };
-
 
         });
 
@@ -63,5 +85,7 @@
                 };
 
                 return requestSvc;
+
         });
+
 })();

@@ -10,13 +10,15 @@
 		'loginmodule',
 		'homemodule',
 		'projectmodule',
+		'filemodule',
 		'ui.materialize',
-		'ngAnimate'
+		'ngAnimate',
+		'ngResource'
 	]);
 
 	var config = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider) {
 
-		$httpProvider.interceptors.push(function ($location, $q, $rootScope, jwtHelper) {
+		$httpProvider.interceptors.push(function ($location, $q, jwtHelper) {
 			return {
 				request : function (conf) {
 					var token = localStorage.getItem('token');
@@ -47,7 +49,7 @@
 				}
 			})
 			.state('home', {
-				url         : '/home',
+				url         : '/',
 				templateUrl : '/views/home.html',
 				controller  : 'HomeController'
 			})
@@ -57,18 +59,19 @@
 				controller: 'InicioController'
 			})
 			.state('home.project',{
-				url: '/project/:projectID',
+				url: 'project/:projectID',
 				templateUrl: '/views/projectDetail.html',
 				controller: 'ProjectController',
 				onEnter: function($state, $stateParams){
 					if(!$stateParams.projectID){
-						$state.transitionTo('home')
+						$state.transitionTo('/')
 					}
 				}
 			})
                         .state('home.files',{
-                                url: '/files',
-                                templateUrl: '/views/files.html'
+                                url: 'files',
+                                templateUrl: '/views/files.html',
+				controller: 'FileController'
                         });
 
 

@@ -7,6 +7,26 @@ body {
    text-align: center;
 }
 
+.k {
+    font-size: 12px;
+}
+
+.selectedFile {
+    background: #4285F4;
+    color: white;
+    font-weight: bold;
+}
+
+.uploadFileProgress {
+    position: fixed;
+    height: 250px;
+    width: 500px;
+    bottom: 0;
+    right: 0;
+    background: red;
+
+}
+
 @media screen and (min-width: 993px) {
     .fixed-container {
         margin-left: 260px;

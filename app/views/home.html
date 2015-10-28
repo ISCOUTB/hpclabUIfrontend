@@ -43,7 +43,7 @@
             </li>
             <li ng-repeat="project in projects" class="animation projects-list waves-effect">
                 <i class="material-icons left">book</i>
-                <a ui-sref="home.project({projectID: project.id})" class="truncate">{{project.name}}</a>
+                <a ui-sref="home.project({projectID: project.id})" ng-click="printIndex($index)" class="truncate">{{project.name}}</a>
             </li>
             <li class="divider"></li>
             <li class="projects">
@@ -110,7 +110,7 @@
 <main>
     <div class="fixed-container" style="border-collapse: collapse;">
         <div class="row">
-            <div class="col s12 m9 l10" ui-view style="margin-top: 84px;">
+            <div class="col s12 m12 l10" ui-view style="margin-top: 84px;">
 
             </div>
         </div>
