@@ -11,8 +11,12 @@ body {
     font-size: 12px;
 }
 
+.fixed-btn {
+    width: 100%;
+}
+
 .selectedFile {
-    background: #4285F4;
+    background: #32323A;
     color: white;
     font-weight: bold;
 }
@@ -25,6 +29,10 @@ body {
     right: 0;
     background: red;
 
+}
+
+.active {
+    background: red;
 }
 
 @media screen and (min-width: 993px) {

@@ -43,7 +43,7 @@
             </li>
             <li ng-repeat="project in projects" class="animation projects-list waves-effect">
                 <i class="material-icons left">book</i>
-                <a ui-sref="home.project({projectID: project.id})" ng-click="printIndex($index)" class="truncate">{{project.name}}</a>
+                <a ui-sref="home.project({projectID: project.id})" ng-click="printIndex($index)" class="truncate" ng-class="{active: $index == selectedProjectIndex}">{{project.name}}</a>
             </li>
             <li class="divider"></li>
             <li class="projects">

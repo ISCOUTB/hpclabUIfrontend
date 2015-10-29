@@ -10,8 +10,6 @@
 
         project.controller('ProjectController', function ($scope, $rootScope, homeService, projectService, $stateParams, $state, $location) {
 
-                var projectID = $stateParams.projectID;
-
                 function arrayObjectIndexOf(arr, obj) {
                         for (var i = 0; i < arr.length; i++) {
                                 if (angular.equals(arr[i], obj)) {
@@ -31,6 +29,9 @@
                         return index;
                 }
 
+                var projectID = $stateParams.projectID;
+
+
                 projectService.getProject(projectID).then(function (result) {
                         $scope.editingProject = result.data;
                 }, function (response) {
@@ -43,15 +44,14 @@
                                         Materialize.toast('Ha ocurrido un problema.', 4000, 'rounded');
                         }
 
-                        $state.transitionTo('home');
+                        $state.transitionTo('/');
 
                 });
 
                 $scope.deleteProject = function () {
                         if (confirm('Está seguro?')){
                                 projectService.deleteProject(projectID).then(function (result) {
-                                        var index = getIndex();
-                                        $scope.projects.splice(index, 1);
+                                        $scope.projects.splice(getIndex(), 1);
                                         $scope.editingProject = null;
                                         $scope.editingProjectIndex = null;
                                         $state.transitionTo('home');

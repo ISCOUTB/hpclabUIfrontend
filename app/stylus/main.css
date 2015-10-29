@@ -13,10 +13,10 @@
   background-color: #32323a;
 }
 .side-nav .logo {
-  background-color: #19b597;
+  background-color: #26a69a;
 }
 .side-nav .logo:hover {
-  background: #1e8a80;
+  background: #26a69a;
 }
 .side-nav .logo .brand-logo {
   position: relative;
@@ -42,7 +42,7 @@
 .side-nav .projects a {
   background-color: #28282e;
   border-radius: 0;
-  color: #19b597;
+  color: #26a69a;
 }
 .card .card-content {
   padding: 5px 20px 5px 20px;

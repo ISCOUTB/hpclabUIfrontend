@@ -18,6 +18,7 @@
                 $scope.showInfo = function (id) {
                         $scope.selectedIndex = id;
                         $scope.moreInfo = $scope.datafiles[id];
+                        console.log($scope.datafiles[id]);
                 };
 
                 $scope.formatSize = function (bytes) {
@@ -30,19 +31,6 @@
                 };
 
                 $scope.uploadFiles = function (files) {
-                        //if (files && files.length) {
-                        //        console.log(files);
-                        //        for (var i = 0; i < files.length; i++) {
-                        //                var file = files[i];
-                        //                fileService.createFile(file).progress(function (evt) {
-                        //                        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                        //                        console.log('progress: ' + progressPercentage + '% ');
-                        //                }).success(function (response) {
-                        //                        console.log(response);
-                        //                        $scope.datafiles.push(response);
-                        //                });
-                        //        }
-                        //}
                         angular.forEach(files, function (file) {
                                 fileService.createFile(file).then(function (response) {
                                         $timeout(function () {
@@ -55,6 +43,19 @@
                 fileService.getFiles().then(function (result) {
                         $scope.datafiles = result.data;
                 });
+
+                $scope.deleteFile = function (id) {
+                        if (confirm('Está seguro?')) {
+                                fileService.deleteFile(id).then(function (response) {
+                                        $scope.datafiles.splice($scope.selectedIndex, 1);
+                                        $scope.selectedIndex = null;
+                                        $scope.moreInfo = null;
+                                        Materialize.toast('El archivo ha sido eliminado exitosamente.', 4000, 'rounded');
+                                }, function (response) {
+                                        Materialize.toast('Ha ocurrido un error eliminando el archivo.', 4000, 'rounded');
+                                })
+                        }
+                };
 
 
         });
@@ -82,6 +83,14 @@
                                 method: "GET",
                                 skipAuthorization: false,
                                 url: getServerName + "/files/"
+                        })
+                };
+
+                requestSvc.deleteFile = function (id) {
+                        return $http({
+                                method: "DELETE",
+                                skipAuthorization: false,
+                                url: getServerName + '/files/' + id + '/'
                         })
                 };
 
