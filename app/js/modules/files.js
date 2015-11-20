@@ -9,10 +9,6 @@
 
         file.controller('FileController', function ($scope, fileService, $stateParams, $state, $location, $timeout, $rootScope, jwtHelper) {
 
-                $scope.$watch('files', function () {
-                        $scope.uploadFiles($scope.files)
-                });
-
                 $scope.showInfo = function (id) {
                         $scope.selectedIndex = id;
                         $scope.moreInfo = $scope.datafiles[id];
@@ -70,7 +66,6 @@
                 };
 
                 $scope.cleanUpload = function(){
-                        console.log("Entramos aqui!!!");
                         $scope.uploading = false;
                 };
 
