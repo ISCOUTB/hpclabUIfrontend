@@ -24,7 +24,7 @@
                         if ($scope.editingProjectIndex) {
                                 index = $scope.editingProjectIndex;
                         } else {
-                                index = arrayObjectIndexOf($scope.$parent.projects, $scope.editingProject);
+                                index = arrayObjectIndexOf($rootScope.projects, $scope.editingProject);
                         }
                         return index;
                 }
@@ -39,12 +39,11 @@
                         switch (response.status) {
                                 case 404:
                                         Materialize.toast('El proyecto no existe.', 4000, 'rounded');
+                                        $location.path('/');
                                         break;
                                 default:
                                         Materialize.toast('Ha ocurrido un problema.', 4000, 'rounded');
                         }
-
-                        $state.transitionTo('/');
 
                 });
 
@@ -61,7 +60,6 @@
                                 });
                         }
                 };
-
         });
 
         project.service('projectService', function ($http, getServerName) {

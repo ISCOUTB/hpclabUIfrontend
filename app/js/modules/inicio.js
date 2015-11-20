@@ -6,30 +6,30 @@
         home.controller('HomeController', function ($scope, $rootScope, homeService, Auth, $location) {
 
                 homeService.getUser().then(function (result) {
-                        $scope.user = result.data;
+                        $rootScope.user = result.data;
                 });
 
                 $scope.copyUser = function () {
-                        $scope.uUser = angular.copy($scope.user);
+                        $scope.uUser = angular.copy($rootScope.user);
                 };
 
                 $(".button-collapse").sideNav();
 
                 $scope.updateUser = function (user) {
                         homeService.updateUser(user).then(function (result) {
-                                $scope.user = result.data;
+                                $rootScope.user = result.data;
                                 $("#editUserModal").closeModal();
                                 Materialize.toast('Edición de usuario exitosa.', 4000, 'rounded');
                         });
                 };
 
                 homeService.getProjects().then(function (result) {
-                        $scope.projects = result.data;
+                        $rootScope.projects = result.data;
                 });
 
                 $scope.createProject = function (project) {
                         homeService.createProject(project).then(function (result) {
-                                $scope.projects.push(result.data);
+                                $rootScope.projects.push(result.data);
                                 $scope.project = {};
                                 $scope.ProjectForm.$setPristine();
                                 $scope.ProjectForm.$setUntouched();
@@ -43,7 +43,7 @@
 
                 $scope.deleteProject = function (project) {
                         homeService.deleteProject(project["id"]).then(function (result) {
-                                $scope.projects.splice(project["index"], 1);
+                                $rootScope.projects.splice(project["index"], 1);
                                 $scope.editingProject = null;
                                 Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
 

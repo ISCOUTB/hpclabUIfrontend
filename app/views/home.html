@@ -17,8 +17,9 @@
                     </li>
                 </ul>
                 <ul id="userDropdown" class="dropdown-content">
-                    <li><a href="#editUserModal" ng-click="copyUser()" modal>Editar</a></li>
+                    <li><a href="#editUserModal" ng-click="copyUser()" modal>Editar información</a></li>
                     <li class="divider"></li>
+                    <li ng-if="user.is_staff"><a ui-sref="admin">Administrador</a></li>
                     <li><a ng-click="logout()">Cerrar sesión</a></li>
                 </ul>
             </div>
@@ -31,7 +32,7 @@
         </div>
         <ul id="slide-out" class="side-nav fixed">
             <li class="logo">
-                <a id="logo-container" href="/home" class="brand-logo">
+                <a id="logo-container" href="/" class="brand-logo">
                     <img src="/images/logo.png" class="hpc-logo"/>
                 </a>
             </li>

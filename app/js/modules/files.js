@@ -7,19 +7,42 @@
 
         var file = angular.module('filemodule', ['homemodule', 'ngFileUpload']);
 
-        file.controller('FileController', function ($scope, fileService, $stateParams, $state, $location, $timeout) {
+        file.controller('FileController', function ($scope, fileService, $stateParams, $state, $location, $timeout, $rootScope, jwtHelper) {
 
                 $scope.$watch('files', function () {
                         $scope.uploadFiles($scope.files)
                 });
 
-                $scope.moreInfo = null;
-
                 $scope.showInfo = function (id) {
                         $scope.selectedIndex = id;
                         $scope.moreInfo = $scope.datafiles[id];
-                        console.log($scope.datafiles[id]);
                 };
+
+                $scope.selectedFiles = [];
+
+                $scope.selectedFilesSize = 0;
+
+                $scope.uploading = false;
+
+                $scope.select = function (file) {
+                        file.selected = !file.selected;
+                        if (file.selected) {
+                                $scope.selectedFiles.push(file);
+                                $scope.selectedFilesSize += file.size;
+                        } else {
+                                $scope.selectedFiles.splice(arrayObjectIndexOf($scope.selectedFiles, file), 1);
+                                $scope.selectedFilesSize -= file.size;
+                        }
+                };
+
+                function arrayObjectIndexOf(arr, obj) {
+                        for (var i = 0; i < arr.length; i++) {
+                                if (angular.equals(arr[i], obj)) {
+                                        return i;
+                                }
+                        }
+                        return -1;
+                }
 
                 $scope.formatSize = function (bytes) {
                         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
@@ -31,32 +54,44 @@
                 };
 
                 $scope.uploadFiles = function (files) {
+                        $scope.uploadingFiles = files;
                         angular.forEach(files, function (file) {
+                                $scope.uploading = true;
                                 fileService.createFile(file).then(function (response) {
                                         $timeout(function () {
-                                                $scope.datafiles.push(response.data);
+                                                $rootScope.datafiles.push(response.data);
                                         });
+                                }, function (response) {
+                                        Materialize.toast('Ha ocurrido un error en la carga del archivo "' + file.name + '".', 4000, 'rounded');
+                                }, function (evt) {
+                                        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
                                 });
                         });
                 };
 
-                fileService.getFiles().then(function (result) {
-                        $scope.datafiles = result.data;
-                });
+                $scope.cleanUpload = function(){
+                        console.log("Entramos aqui!!!");
+                        $scope.uploading = false;
+                };
 
-                $scope.deleteFile = function (id) {
+                $scope.deleteFiles = function (files) {
                         if (confirm('Está seguro?')) {
-                                fileService.deleteFile(id).then(function (response) {
-                                        $scope.datafiles.splice($scope.selectedIndex, 1);
-                                        $scope.selectedIndex = null;
-                                        $scope.moreInfo = null;
-                                        Materialize.toast('El archivo ha sido eliminado exitosamente.', 4000, 'rounded');
-                                }, function (response) {
-                                        Materialize.toast('Ha ocurrido un error eliminando el archivo.', 4000, 'rounded');
+                                angular.forEach(files, function (file) {
+                                        fileService.deleteFile(file.id).then(function (response) {
+                                                $rootScope.datafiles.splice(arrayObjectIndexOf($rootScope.datafiles, file), 1);
+                                                $scope.selectedFiles.splice(arrayObjectIndexOf($scope.selectedFiles, file), 1);
+                                                $scope.selectedFilesSize -= file.size;
+                                        }, function (response) {
+                                                Materialize.toast('Ha ocurrido un error eliminando el archivo "' + file.filename + '".', 4000, 'rounded');
+                                        })
+
                                 })
                         }
                 };
 
+                fileService.getFiles().then(function (result) {
+                        $rootScope.datafiles = result.data;
+                });
 
         });
 

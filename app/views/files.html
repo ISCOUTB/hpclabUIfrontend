@@ -9,38 +9,54 @@
                 <ul>
                     <li class="divider"></li>
                 </ul>
-                <div ng-show="moreInfo">
+                <div ng-show="selectedFiles.length == 1">
                     <h5 style="overflow: hidden; word-break: break-all;">
-                        {{moreInfo.filename}}</h5>
-                    <!--</dl>-->
-                    <table class="highlight k">
+                        {{selectedFiles[0].filename}}</h5>
+                    <table class="k">
                         <tbody>
                         <tr>
                             <td><strong>Tipo</strong></td>
-                            <td>{{moreInfo.type}}</td>
+                            <td>{{selectedFiles[0].type}}</td>
                         </tr>
                         <tr>
                             <td><strong>Tamaño</strong></td>
-                            <td>{{formatSize(moreInfo.size)}} ({{ moreInfo.size | number: 0}} bytes)</td>
+                            <td>{{formatSize(selectedFiles[0].size)}} ({{ selectedFiles[0].size | number: 0}} bytes)
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>Modificado</strong></td>
-                            <td>{{moreInfo.updated_at | date: 'medium'}}</td>
+                            <td>{{selectedFiles[0].updated_at | date: 'medium'}}</td>
                         </tr>
                         <tr>
                             <td><strong>Creado</strong></td>
-                            <td>{{moreInfo.created_at | date: 'medium'}}</td>
+                            <td>{{selectedFiles[0].created_at | date: 'medium'}}</td>
                         </tr>
                         </tbody>
                     </table>
-                    <a ng-click="deleteFile(moreInfo.id)" class="waves-effect waves-light btn fixed-btn"><i class="material-icons right">delete</i> Eliminar</a>
+                    <a ng-click="deleteFiles(selectedFiles)" class="waves-effect waves-light btn fixed-btn"><i
+                            class="material-icons right">delete</i> Eliminar</a>
+                </div>
+                <div ng-show="selectedFiles.length > 1">
+                    <h5 style="overflow: hidden; word-break: break-all; text-align: center;">
+                        {{selectedFiles.length}} archivos</h5>
+                    <table class="k">
+                        <tbody>
+                        <tr>
+                            <td><strong>Tamaño</strong></td>
+                            <td>{{formatSize(selectedFilesSize)}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a ng-click="deleteFiles(selectedFiles)" class="waves-effect waves-light btn fixed-btn"><i
+                            class="material-icons right">delete</i> Eliminar</a>
                 </div>
             </div>
             <div class="col s12 m8 l9" style="overflow: auto; height: 675px;">
                 <div class="row">
                     <div ng-repeat="file in datafiles" class="col s12 m6 l3">
-                        <div class="card " ng-click="showInfo($index)" ng-class="{selectedFile: $index == selectedIndex}">
-                            <div class="card-action"  style="padding: 10px;">
+                        <div class="card " ng-click="select(file)"
+                             ng-class="{selectedFile: file.selected}">
+                            <div class="card-action" style="padding: 10px;">
                                 <h6 class="truncate" style="font-size: 12px;">
                                     {{file.filename}}</h6>
                             </div>
@@ -48,9 +64,32 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
 </div>
-<div class="uploadFileProgress">
-
+<div class="card" ng-show="uploading"
+     style="position: absolute; right: 0; width: 500px; bottom: 0;">
+    <div class="card-content">
+        <div>
+            Progreso de carga
+            <a href="#" ng-click="cleanUpload()" style="float: right;">X</a>
+        </div>
+        <div style="max-height: 300px; overflow:auto; overflow-x: hidden;">
+            <table class="responsive-table" style="font-size: 12px;">
+                <tbody>
+                <tr ng-repeat="f in uploadingFiles">
+                    <td style="width: 40%;overflow: hidden; word-break: break-all;">{{f.name}}</td>
+                    <td style="width: 20%">{{formatSize(f.size)}}</td>
+                    <td style="width: 40%">
+                        <div class="progress">
+                            <div class="determinate" style="width: {{f.progress}}%"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
