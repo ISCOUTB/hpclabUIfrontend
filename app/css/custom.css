@@ -21,6 +21,15 @@ body {
     font-weight: bold;
 }
 
+.card-image {
+    height: 400px;
+    overflow: hidden;
+}
+
+.card-image img {
+    height: 500px;
+}
+
 @media screen and (min-width: 993px) {
     .fixed-container {
         margin-left: 260px;

@@ -60,7 +60,7 @@
 
         });
 
-        home.service('homeService', function ($http, getServerName, Upload) {
+        home.service('homeService', function ($http, getServerName) {
 
                 var requestSvc = {};
 
