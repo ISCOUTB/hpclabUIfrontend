@@ -8,35 +8,19 @@
 
         var project = angular.module('projectmodule', ['homemodule']);
 
-        project.controller('ProjectController', function ($scope, $rootScope, homeService, projectService, $stateParams, $state, $location) {
+        project.controller('ProjectController', function ($scope, $rootScope, homeService, projectService, $stateParams, $state, $location, _) {
 
-                function arrayObjectIndexOf(arr, obj) {
-                        for (var i = 0; i < arr.length; i++) {
-                                if (angular.equals(arr[i], obj)) {
-                                        return i;
-                                }
-                        }
-                        return -1;
-                }
-
-                function getIndex() {
-                        var index = -1;
-                        if ($scope.editingProjectIndex) {
-                                index = $scope.editingProjectIndex;
-                        } else {
-                                index = arrayObjectIndexOf($rootScope.projects, $scope.editingProject);
-                        }
-                        return index;
-                }
-
-                var projectID = $stateParams.projectID;
-
+                var projectID = parseInt($stateParams.projectID);
 
                 projectService.getProject(projectID).then(function (result) {
                         $scope.editingProject = result.data;
                 }, function (response) {
 
                         switch (response.status) {
+                                case 403:
+                                        Materialize.toast('No tiene autorización para acceder a este proyecto.', 4000, 'rounded');
+                                        $location.path('/');
+                                        break;
                                 case 404:
                                         Materialize.toast('El proyecto no existe.', 4000, 'rounded');
                                         $location.path('/');
@@ -47,12 +31,27 @@
 
                 });
 
+                $scope.copyProject = function () {
+                        $scope.uProject = angular.copy($scope.editingProject);
+                };
+
+                $scope.updateProject = function (project) {
+                        projectService.updateProject(projectID, project).then(function(result){
+                                $scope.editingProject = result.data;
+                                $scope.projects[_.findIndex($scope.projects, {'id': projectID})] = result.data;
+                                $scope.uProject = {};
+                                $scope.UpdateProjectForm.$setPristine();
+                                $scope.UpdateProjectForm.$setUntouched();
+                                $("#editProjectModal").closeModal();
+                                Materialize.toast("Edición de proyecto exitosa.", 4000, 'rounded');
+                        });
+                };
+
                 $scope.deleteProject = function () {
-                        if (confirm('Está seguro?')){
-                                projectService.deleteProject(projectID).then(function (result) {
-                                        $scope.projects.splice(getIndex(), 1);
-                                        $scope.editingProject = null;
-                                        $scope.editingProjectIndex = null;
+                        if (confirm('Está seguro?')) {
+                                projectService.deleteProject(projectID).then(function () {
+                                        $scope.projects.splice(_.findIndex($scope.projects, {'id': projectID}), 1);
+                                        $scope.editingProject = {};
                                         $state.transitionTo('home');
                                         Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
                                 }, function () {
@@ -60,6 +59,7 @@
                                 });
                         }
                 };
+
         });
 
         project.service('projectService', function ($http, getServerName) {
@@ -71,6 +71,15 @@
                                 method: "GET",
                                 skipAuthorization: false,
                                 url: getServerName + '/projects/' + id + '/'
+                        })
+                };
+
+                requestSvc.updateProject = function (id, project) {
+                        return $http({
+                                method: "PUT",
+                                skipAuthorization: false,
+                                url: getServerName + '/projects/' + id + '/',
+                                data: project
                         })
                 };
 

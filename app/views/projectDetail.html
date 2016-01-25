@@ -1,3 +1,25 @@
+<div id="editProjectModal" class="modal">
+    <div class="modal-content">
+        <h4>Edición de proyecto</h4>
+
+        <form name="UpdateProjectForm" novalidate>
+            <div class="input-field">
+                <label for="name">Nombre</label>
+                <input name="name" type="text" id="name" ng-required="true" ng-model="uProject.name">
+            </div>
+            <div class="input-field">
+                <label for="description">Descripción</label>
+                    <textarea class="materialize-textarea" name="description" id="description"
+                              ng-model="uProject.description" md-maxlength="140"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-fixed-footer center-align">
+        <button class="btn waves-effect waves-light" ng-disabled="UpdateProjectForm.$invalid || UpdateProjectForm.$pristine"
+                ng-click="updateProject(uProject)">Guardar
+        </button>
+    </div>
+</div>
 
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large" style="background-color: #19B597;">
@@ -12,7 +34,7 @@
             </a>
         </li>
         <li>
-            <a class="btn-floating blue">
+            <a href="#editProjectModal" ng-click="copyProject()" class="btn-floating blue" modal>
                 <i class="material-icons">
                     mode_edit
                 </i>
@@ -28,6 +50,7 @@
 
     </ul>
 </div>
+
 <div class="card-panel">
     <h4 class="project-title">{{editingProject.name}}</h4>
     <label class="project-created">{{editingProject.created_at | date: '' :
@@ -35,4 +58,5 @@
 
     <p class="project-description">{{editingProject.description}}</p>
 </div>
+<div>Workflow implementation</div>
 <div class="limp"></div>

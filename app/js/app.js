@@ -12,9 +12,13 @@
                 'projectmodule',
                 'filemodule',
                 'adminmodule',
+                'navbarmodule',
+                'toolmodule',
                 'ui.materialize',
+                'lodash',
                 'ngAnimate',
-                'ngResource'
+                'ngResource',
+                'textAngular'
         ]);
 
         var config = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider) {
@@ -51,14 +55,8 @@
                         })
                         .state('home', {
                                 url: '/',
-                                templateUrl: '/views/home.html',
+                                templateUrl: '/views/home2.html',
                                 controller: 'HomeController'
-                        })
-                        .state('admin', {
-                                url: '/admin',
-                                cache: false,
-                                templateUrl: 'views/admin.html',
-                                controller: 'AdminController'
                         })
                         .state('home.project', {
                                 url: 'project/:projectID',
@@ -74,6 +72,22 @@
                                 url: 'files',
                                 templateUrl: '/views/files.html',
                                 controller: 'FileController'
+                        })
+                        .state('admin', {
+                                url: '/admin/',
+                                templateUrl: '/views/admin.html',
+                                controller: 'AdminController'
+                        })
+                        .state('admin.tool', {
+                                url: 'tool/:toolID',
+                                templateUrl: '/views/toolDetail.html',
+                                controller: 'ToolController',
+                                onEnter: function ($state, $stateParams) {
+                                        if (!$stateParams.toolID) {
+                                                $state.transitionTo('/admin')
+                                        }
+                                }
+
                         });
 
                 $urlRouterProvider.otherwise("/login");
@@ -87,15 +101,5 @@
         };
 
         app.config(config);
-
-        //app.run(['$http', '$rootScope', 'getServerName', function ($http, $rootScope, getServerName) {
-        //        $http({
-        //                method: "GET",
-        //                skipAuthorization: false,
-        //                url: getServerName + "/user/"
-        //        }).then(function (result) {
-        //                $rootScope.user = result.data;
-        //        })
-        //}]);
 
 })();

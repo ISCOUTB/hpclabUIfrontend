@@ -7,6 +7,8 @@
         var admin = angular.module('adminmodule', []);
 
         admin.controller('AdminController', function ($scope, adminService, $location) {
+
+                $scope.tools = [];
                 adminService.getUser().then(function (result) {
                         if(!result.data.is_staff){
                                 $location.path('/');
@@ -14,6 +16,20 @@
                         }
                         $scope.user = result.data;
                 });
+
+                adminService.getTools().then(function(result){
+                        $scope.tools = result.data;
+                });
+
+                $scope.createTool = function (tool) {
+                        adminService.createTool(tool).then(function(result){
+                                $scope.tools.push(result.data);
+                                $scope.newTool = {};
+                                $scope.ToolForm.$setPristine();
+                                $scope.ToolForm.$setUntouched();
+                                $("#newToolModal").closeModal();
+                        })
+                };
 
         });
 
@@ -29,7 +45,25 @@
                         })
                 };
 
+                requestSvc.getTools = function () {
+                        return $http({
+                                method: "GET",
+                                skipAuthorization: false,
+                                url: getServerName + "/tools/"
+                        })
+                };
+
+                requestSvc.createTool = function (tool) {
+                        return $http({
+                                method: "POST",
+                                skipAuthorization: false,
+                                url: getServerName + "/tools/",
+                                data: tool
+                        })
+                };
+
                 return requestSvc;
+
         });
 
 })();

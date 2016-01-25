@@ -1,6 +1,11 @@
 'use strict';
 (function () {
 	var factories = angular.module('factories', ['angular-jwt']);
+	var lodash = angular.module('lodash',[]);
+
+	lodash.factory('_', function(){
+		return window._;
+	});
 
 	factories.factory('httpErrorResponseInterceptor', ['$q', '$location',
 		function ($q, $location) {
@@ -68,7 +73,6 @@
 
 	factories.factory('getServerName', function () {
 		return 'http://0.0.0.0:9000';
-		//return 'http://172.16.9.152:9000';
 		//return 'https://api.hpclab.unitecnologica.edu.co';
 	});
 

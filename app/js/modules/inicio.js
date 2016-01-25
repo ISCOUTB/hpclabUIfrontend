@@ -6,49 +6,39 @@
         home.controller('HomeController', function ($scope, $rootScope, homeService, Auth, $location) {
 
                 homeService.getUser().then(function (result) {
-                        $rootScope.user = result.data;
+                        $scope.user = result.data;
                 });
 
                 $scope.copyUser = function () {
-                        $scope.uUser = angular.copy($rootScope.user);
+                        $scope.uUser = angular.copy($scope.user);
                 };
 
-                $(".button-collapse").sideNav();
+                //$(".button-collapse").sideNav();
 
                 $scope.updateUser = function (user) {
                         homeService.updateUser(user).then(function (result) {
-                                $rootScope.user = result.data;
+                                $scope.user = result.data;
+                                $scope.uUser = {};
                                 $("#editUserModal").closeModal();
                                 Materialize.toast('Edición de usuario exitosa.', 4000, 'rounded');
                         });
                 };
 
+                $scope.projects = [];
+
                 homeService.getProjects().then(function (result) {
-                        $rootScope.projects = result.data;
+                        $scope.projects = result.data;
                 });
 
                 $scope.createProject = function (project) {
                         homeService.createProject(project).then(function (result) {
-                                $rootScope.projects.push(result.data);
+                                $scope.projects.push(result.data);
                                 $scope.project = {};
                                 $scope.ProjectForm.$setPristine();
                                 $scope.ProjectForm.$setUntouched();
                                 $("#newProjectModal").closeModal();
-                        });
-                };
+                                Materialize.toast("Creación de proyecto exitosa.", 4000, 'rounded');
 
-                $scope.printIndex = function (id){
-                        $scope.editingProjectIndex = id;
-                };
-
-                $scope.deleteProject = function (project) {
-                        homeService.deleteProject(project["id"]).then(function (result) {
-                                $rootScope.projects.splice(project["index"], 1);
-                                $scope.editingProject = null;
-                                Materialize.toast('El proyecto ha sido eliminado exitosamente.', 4000, 'rounded');
-
-                        }, function () {
-                                Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
                         });
                 };
 
