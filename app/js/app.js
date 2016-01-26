@@ -18,7 +18,8 @@
                 'lodash',
                 'ngAnimate',
                 'ngResource',
-                'textAngular'
+                'textAngular',
+                'ngSanitize'
         ]);
 
         var config = function ($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider) {
