@@ -32,8 +32,10 @@
 
         });
 
-        nav.directive('navbar', function(){
-
+        nav.directive('navbarDirective', function(){
+           return{
+              templateUrl:'/views/templates/navbar.tpl.html'
+           }
         });
 
         nav.service('navbarService', function ($http, getServerName) {

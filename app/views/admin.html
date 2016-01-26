@@ -1,104 +1,67 @@
-<!--<header>-->
-<!--<nav class="top-nav">-->
-<!--<div>-->
-<!--<div class="nav-wrapper">-->
-<!--<ul class="right">-->
-<!--<li>-->
-<!--<a class="dropdown-button btn" href="#" data-beloworigin="true" data-activates="userDropdown"-->
-<!--dropdown-->
-<!--data-hover="true">-->
-<!--<div ng-show="user.first_name == ''">-->
-<!--{{user.username}}-->
-<!--</div>-->
-<!--<div ng-show="user.first_name != ''">-->
-<!--{{user.first_name}}-->
-<!--</div>-->
-<!--</a>-->
-<!--</li>-->
-<!--</ul>-->
-<!--<ul id="userDropdown" class="dropdown-content">-->
-<!--<li><a href="#editUserModal" ng-click="copyUser()" modal>Editar información</a></li>-->
-<!--<li class="divider"></li>-->
-<!--<li><a ng-click="logout()">Cerrar sesión</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</div>-->
-<!--</nav>-->
-<!--<div class="container">-->
-<!--<div class="hide-on-large-only">-->
-<!--<a href="#" data-activates="slide-out" class="button-collapse top-nav"><i-->
-<!--class="medium material-icons">menu</i></a>-->
-<!--</div>-->
+<header>
+   <div navbar-directive>
 
-<!--<div id="editUserModal" class="modal">-->
-<!--<div class="modal-content">-->
-<!--<h4>Edición de usuario</h4>-->
+   </div>
+   <div class="container">
 
-<!--<form name="UserForm" novalidate>-->
-<!--<input type="hidden" name="id" ng-model="uUser.id" value="{{user.id}}">-->
-<!--<input type="hidden" name="username" ng-model="uUser.username" value="{{user.username}}">-->
+      <div class="hide-on-large-only">
+         <a href="#" data-activates="slide-out" class="button-collapse top-nav"><i
+                    class="medium material-icons">menu</i></a>
+      </div>
+      <ul id="slide-out" class="side-nav fixed">
+         <li class="logo">
+            <a id="logo-container" href="/" class="brand-logo">
+               <img src="/images/logo.png" class="hpc-logo" />
+            </a>
+         </li>
+         <li class="projects">
+            <a href="#newToolModal" class="waves-effect waves-light btn" modal>
+               <i class="material-icons left">settings_applications</i> Herramientas
+               <i class="material-icons right">add</i>
+            </a>
 
-<!--<div class="input-field">-->
-<!--<label for="first_name">Nombres</label>-->
-<!--<input class="validate" name="first_name" type="text" id="first_name" ng-required="true"-->
-<!--ng-model="uUser.first_name">-->
-<!--</div>-->
-<!--<div class="input-field">-->
-<!--<label for="last_name">Apellidos</label>-->
-<!--<input name="last_name" type="text" id="last_name" ng-required="true"-->
-<!--ng-model="uUser.last_name">-->
-<!--</div>-->
-<!--<div class="input-field">-->
-<!--<label for="email">Email</label>-->
-<!--<input name="email" id="email" type="email" ng-required="true" ng-model="uUser.email"-->
-<!--pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">-->
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
-<!--<div class="modal-fixed-footer center-align">-->
-<!--<button class="btn waves-effect waves-light" ng-disabled="UserForm.$invalid || UserForm.$pristine"-->
-<!--ng-click="updateUser(uUser)">Editar-->
-<!--</button>-->
-<!--</div>-->
-<!--</div>-->
+         </li>
+
+
+         <li ng-repeat="tool in tools" class="animation projects-list waves-effect">
+            <i class="material-icons left">build</i>
+            <a ui-sref="admin.tool({toolID: tool.id})" ng-click="printIndex(tool)" class="truncate" ng-class="{active: $index == selectedProjectIndex}">{{tool.name}}</a>
+         </li>
+         <li class="divider"></li>
+      </ul>
+   </div>
+</header>
+
+
+
 <div id="newToolModal" class="modal">
-    <div class="modal-content">
-        <h4>Nueva herramienta</h4>
+   <div class="modal-content">
+      <h4>Nueva herramienta</h4>
 
-        <form name="ToolForm" novalidate>
-            <div class="input-field">
-                <label for="name">Nombre</label>
-                <input name="name" type="text" id="name" ng-required="true" ng-model="tool.name">
-            </div>
-        </form>
-    </div>
-    <div class="modal-fixed-footer center-align">
-        <button class="btn waves-effect waves-light" ng-disabled="ToolForm.$invalid || ToolForm.$pristine"
-                ng-click="createTool(tool)">Guardar
-        </button>
-    </div>
+      <form name="ToolForm" novalidate>
+         <div class="input-field">
+            <label for="name">Nombre</label>
+            <input name="name" type="text" id="name" ng-required="true" ng-model="tool.name">
+         </div>
+      </form>
+   </div>
+   <div class="modal-fixed-footer center-align">
+      <button class="btn waves-effect waves-light" ng-disabled="ToolForm.$invalid || ToolForm.$pristine" ng-click="createTool(tool)">Guardar
+      </button>
+   </div>
 </div>
-<!--</div>-->
-<!--</header>-->
+
 <div class="row">
 
-    <div class="col s12 m4 l3">
-        <a href="#newToolModal" class="waves-effect waves-light btn" modal>
-            <i class="material-icons left">settings_applications</i> Herramientas
-            <i class="material-icons right">add</i>
-        </a>
-        <ul>
-            <li ng-repeat="tool in tools" class="animation projects-list waves-effect">
-                <i class="material-icons left">build</i>
-                <a ui-sref="admin.tool({toolID: tool.id})" ng-click="printIndex(tool)" class="truncate"
-                   ng-class="{active: $index == selectedProjectIndex}">{{tool.name}}</a>
-            </li>
-            <li class="divider"></li>
-        </ul>
-    </div>
+   <div class="col s12 m4 l3">
 
-    <div ui-view class="col s12 m8 l9">
+      <ul>
 
-    </div>
+      </ul>
+   </div>
+
+   <div ui-view class="col s12 m8 l9">
+
+   </div>
 
 </div>

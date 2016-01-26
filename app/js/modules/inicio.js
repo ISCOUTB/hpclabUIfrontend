@@ -13,7 +13,7 @@
                         $scope.uUser = angular.copy($scope.user);
                 };
 
-                //$(".button-collapse").sideNav();
+                $(".button-collapse").sideNav();
 
                 $scope.updateUser = function (user) {
                         homeService.updateUser(user).then(function (result) {

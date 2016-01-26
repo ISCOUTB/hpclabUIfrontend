@@ -1,0 +1,28 @@
+<nav class="top-nav">
+   <div>
+      <div class="nav-wrapper">
+         <ul class="right">
+            <li>
+               <a class="dropdown-button btn" href="#" data-beloworigin="true" data-activates="userDropdown" dropdown data-hover="true">
+                  <div ng-show="user.first_name == ''">
+                     {{user.username}}
+                  </div>
+                  <div ng-show="user.first_name != ''">
+                     {{user.first_name}}
+                  </div>
+               </a>
+            </li>
+         </ul>
+         <ul id="userDropdown" class="dropdown-content">
+            <li><a href="#editUserModal" ng-click="copyUser()" modal>Editar información</a></li>
+            <li class="divider"></li>
+            <!--li ng-if="user.is_staff"-->
+            <li ng-if="user.is_staff">
+
+               <a ui-sref="admin">Administrador</a>
+            </li>
+            <li><a ng-click="logout()">Cerrar sesión</a></li>
+         </ul>
+      </div>
+   </div>
+</nav>
