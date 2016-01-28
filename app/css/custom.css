@@ -8,49 +8,85 @@ body {
 }
 
 .k {
-    font-size: 12px;
+   font-size: 12px;
 }
 
 .fixed-btn {
-    width: 100%;
+   width: 100%;
 }
 
 .selectedFile {
-    background: #32323A;
-    color: white;
-    font-weight: bold;
+   background: #32323A;
+   color: white;
+   font-weight: bold;
 }
 
 .card-image {
-    height: 400px;
-    overflow: hidden;
+   height: 400px;
+   overflow: hidden;
 }
 
 .card-image img {
-    height: 500px;
+   height: 500px;
+}
+
+.marg-top {
+   position: relative;
+   top: 84px;
+}
+
+.section-tabs {
+   display: block;
+   margin-left: 260px;
+   margin-bottom: 40px;
+   width: 100%;
+}
+
+.ta-toolbar {
+   margin-top: 20px;
+}
+
+.ta-toolbar .btn-group {
+   display: inline;
+   margin-right: 10px;
+}
+
+.ta-toolbar .btn-group .btn {
+   margin-bottom: 5px;
+   background: #DFDFDF;
+   color: #5A5656;
+
+}
+
+.ta-toolbar .btn-group .active {
+   background: #26A69A ;
+   color: #fff;
 }
 
 @media screen and (min-width: 993px) {
-    .fixed-container {
-        margin-left: 260px;
-    }
+   .fixed-container {
+      margin-left: 260px;
+   }
+   .center-view {
+      margin-left: 10px !important;
+   }
 }
 
 @media screen and (max-width: 992px) {
-    .fixed-container {
-        margin-left: 20px;
-    }
+   .fixed-container {
+      margin-left: 20px;
+   }
+   .center-view {
+      margin-left: 20px !important;
+   }
+}
 
-    .card-image {
-        height: 200px;
-        overflow: hidden;
-    }
+.card-image {
+   height: 200px;
+   overflow: hidden;
+}
 
-    .card-image img {
-        height: 500px;
-        margin-top: -200px;
-
-    }
-
-
+.card-image img {
+   height: 500px;
+   margin-top: -200px;
 }

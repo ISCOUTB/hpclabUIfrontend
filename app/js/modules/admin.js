@@ -7,6 +7,10 @@
    var admin = angular.module('adminmodule', []);
 
    admin.controller('AdminController', function ($scope, adminService, $location) {
+      //Control Scroll
+
+      $('.scrollspy').scrollSpy();
+
 
       $scope.tools = [];
       adminService.getUser().then(function (result) {
