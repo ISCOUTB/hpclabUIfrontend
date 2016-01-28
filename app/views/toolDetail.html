@@ -1,15 +1,36 @@
-{{tool_ID}}
-<div class="row">
+<div class="row" style="margin-top: 100px;">
     <div class="col m4 s12">
-        <text-angular ng-model="editingTool.description">
-        </text-angular>
+        <h5>Información general</h5>
+        <br>
+        <form name="EditingToolForm" novalidate>
+            <div class="input-field">
+                <label for="name">Nombre</label>
+                <input value="editingTool.name" name="name" type="text" id="name" ng-required="true"
+                       ng-model="editingTool.name">
+            </div>
+            <!--<text-angular ng-model="editingTool.description">-->
+            <!--</text-angular>-->
+            <div class="input-field">
+                <label for="doc">Documentación</label>
+                <textarea value="editingTool.description" name="doc" id="doc" ng-required="true"
+                          ng-model="editingTool.description" class="materialize-textarea">
+
+                </textarea>
+            </div>
+        </form>
+        <div style="text-align: center;">
+            <button class="btn waves-effect waves-light"
+                    ng-disabled="EditingToolForm.$invalid || EditingToolForm.$pristine"
+                    ng-click="updateTool(editingTool)">Guardar
+            </button>
+        </div>
     </div>
     <div class="col m4 s12">
-        ghjhkh
+        <h5>Parámetros</h5>
 
     </div>
     <div class="col m4 s12">
-        <p>Archivos</p>
+        <h5>Archivos</h5>
     </div>
 </div>
 <div class="fixed-action-btn">
@@ -24,20 +45,19 @@
                 </i>
             </a>
         </li>
-        <li>
-            <a href="#editProjectModal" ng-click="copyProject()" class="btn-floating blue" modal>
-                <i class="material-icons">
-                    mode_edit
-                </i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating green">
-                <i class="material-icons">
-                    play_arrow
-                </i>
-            </a>
-        </li>
-
+        <!--<li>-->
+        <!--<a href="#editProjectModal" ng-click="copyProject()" class="btn-floating blue" modal>-->
+        <!--<i class="material-icons">-->
+        <!--mode_edit-->
+        <!--</i>-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a class="btn-floating green">-->
+        <!--<i class="material-icons">-->
+        <!--check_circle-->
+        <!--</i>-->
+        <!--</a>-->
+        <!--</li>-->
     </ul>
 </div>

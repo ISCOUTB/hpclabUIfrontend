@@ -10,10 +10,10 @@
 
       $scope.tools = [];
       adminService.getUser().then(function (result) {
-         if (!result.data.is_staff) {
-            $location.path('/');
-            Materialize.toast('No tienes permiso para acceder a este sitio.', 4000, 'rounded')
-         }
+         //if (!result.data.is_staff) {
+         //   $location.path('/');
+         //   Materialize.toast('No tienes permiso para acceder a este sitio.', 4000, 'rounded')
+         //}
          $scope.user = result.data;
       });
 

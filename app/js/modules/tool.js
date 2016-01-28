@@ -30,6 +30,15 @@
                 });
 
                 $scope.updateTool = function (tool){
+                        tool.params = {};
+                        toolService.editTool(tool).then(function (result) {
+                                $scope.editingTool = result.data;
+                                $scope.tools[_.findIndex($scope.tools, {'id': tool.id})] = result.data;
+                                $scope.EditingToolForm.$setPristine();
+                                $scope.EditingToolForm.$setUntouched();
+                                Materialize.toast("Edición de herramienta exitosa", 4000, 'rounded');
+
+                        });
 
                 };
 
