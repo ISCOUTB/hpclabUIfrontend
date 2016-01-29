@@ -25,7 +25,7 @@
 
          <li ng-repeat="tool in tools" class="animation projects-list waves-effect">
             <i class="material-icons left">build</i>
-            <a ui-sref="admin.tool({toolID: tool.id})" ng-click="printIndex(tool)" class="truncate" ng-class="{active: $index == selectedProjectIndex}">{{tool.name}}</a>
+            <a ui-sref="admin.tool({toolID: tool.id})" class="truncate">{{tool.name}}</a>
          </li>
          <li class="divider"></li>
       </ul>

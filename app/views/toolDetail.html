@@ -1,125 +1,54 @@
-<div class="row">
-    <div id="general" class="col m4 s12 l12 section scrollspy">
+<div class="row" style="margin-top: 100px;">
+    <div class="col m4 s12">
         <h5>Información general</h5>
         <br>
         <form name="EditingToolForm" novalidate>
             <div class="input-field">
                 <label for="name">Nombre</label>
                 <input value="editingTool.name" name="name" type="text" id="name" ng-required="true"
-                       ng-model="editingTool.name">
+                       ng-model="editingTool.name" ng-readonly="readOnlyF">
             </div>
-            <text-angular ng-model="editingTool.description" ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'], ['html', 'insertImage','insertLink']]">
-            </text-angular>
-            <!--div class="input-field">
+            <!--<text-angular ng-model="editingTool.description">-->
+            <!--</text-angular>-->
+            <div class="input-field">
                 <label for="doc">Documentación</label>
                 <textarea value="editingTool.description" name="doc" id="doc" ng-required="true"
-                          ng-model="editingTool.description" class="materialize-textarea">
+                          ng-model="editingTool.description" class="materialize-textarea" ng-readonly="readOnlyF">
 
                 </textarea>
-            </div-->
+            </div>
         </form>
         <div style="text-align: center;">
+            <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="!readOnlyF">
+                Editar
+            </button>
+
             <button class="btn waves-effect waves-light"
                     ng-disabled="EditingToolForm.$invalid || EditingToolForm.$pristine"
-                    ng-click="updateTool(editingTool)">Guardar
+                    ng-click="updateTool(editingTool)" ng-hide="readOnlyF">Guardar
             </button>
+
+            <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="readOnlyF">Cancelar</button>
         </div>
     </div>
-    <div id="params" class="col s12 l12 section scrollspy" >
+    <div class="col m4 s12">
         <h5>Parámetros</h5>
-<br>
-      <br>
-      <br>
-      <br>
 
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br> v
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br> v
-      <br>
-      <br>
-
-      <br>
-
-      <br> v
     </div>
-    <div id="files" class="col s12 l12 section scrollspy">
+    <div class="col m4 s12">
         <h5>Archivos</h5>
-        <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br> v
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br> v
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <br>
-
-      <br> v
+        <a ngf-select="prepareFiles($files, $invalidFiles)" multiple ngf-max-size="100MB"
+           ngf-fix-orientation="false" class="waves-effect waves-light btn fixed-btn"><i
+                class="material-icons right">file_upload</i>Seleccionar archivos</a>
+        <table class="responsive-table" style="font-size: 12px;">
+            <tbody>
+            <tr ng-repeat="f in toUploadFiles">
+                <td style="width: 10%;"></td>
+                <td style="width: 70%;overflow: hidden; word-break: break-all;">{{f.name}}</td>
+                <td style="width: 20%">{{formatSize(f.size)}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="fixed-action-btn">
@@ -134,19 +63,5 @@
                 </i>
             </a>
         </li>
-        <!--<li>-->
-        <!--<a href="#editProjectModal" ng-click="copyProject()" class="btn-floating blue" modal>-->
-        <!--<i class="material-icons">-->
-        <!--mode_edit-->
-        <!--</i>-->
-        <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-        <!--<a class="btn-floating green">-->
-        <!--<i class="material-icons">-->
-        <!--check_circle-->
-        <!--</i>-->
-        <!--</a>-->
-        <!--</li>-->
     </ul>
 </div>

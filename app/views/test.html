@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="row" style="margin-top: 100px;">
+    <div class="col m4 s12">
+        <h5>Información general</h5>
+        <br>
+        <form name="EditingToolForm" novalidate>
+            <div class="input-field">
+                <label for="name">Nombre</label>
+                <input value="editingTool.name" name="name" type="text" id="name" ng-required="true"
+                       ng-model="editingTool.name" ng-readonly="readOnlyF">
+            </div>
+            <!--<text-angular ng-model="editingTool.description">-->
+            <!--</text-angular>-->
+            <div class="input-field">
+                <label for="doc">Documentación</label>
+                <textarea value="editingTool.description" name="doc" id="doc" ng-required="true"
+                          ng-model="editingTool.description" class="materialize-textarea" ng-readonly="readOnlyF">
 
-</body>
-</html>
+                </textarea>
+            </div>
+        </form>
+        <div style="text-align: center;">
+            <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="!readOnlyF">
+                Editar
+            </button>
+
+            <button class="btn waves-effect waves-light"
+                    ng-disabled="EditingToolForm.$invalid || EditingToolForm.$pristine"
+                    ng-click="updateTool(editingTool)" ng-hide="readOnlyF">Guardar
+            </button>
+
+            <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="readOnlyF">Cancelar</button>
+        </div>
+    </div>
+    <div class="col m4 s12">
+        <h5>Parámetros</h5>
+
+    </div>
+    <div class="col m4 s12">
+        <h5>Archivos</h5>
+    </div>
+</div>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large" style="background-color: #19B597;">
+        <i class="large material-icons">settings</i>
+    </a>
+    <ul>
+        <li>
+            <a ng-click="deleteTool()" class="btn-floating red">
+                <i class="material-icons">
+                    delete
+                </i>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -14,10 +14,10 @@
 
       $scope.tools = [];
       adminService.getUser().then(function (result) {
-         //if (!result.data.is_staff) {
-         //   $location.path('/');
-         //   Materialize.toast('No tienes permiso para acceder a este sitio.', 4000, 'rounded')
-         //}
+         if (!result.data.is_staff) {
+            $location.path('/');
+            Materialize.toast('No tienes permiso para acceder a este sitio.', 4000, 'rounded')
+         }
          $scope.user = result.data;
       });
 
@@ -26,8 +26,6 @@
       });
 
       $scope.createTool = function (tool) {
-         tool.description = "fskdjgikfgdjhkfgjh";
-         tool.params = {};
          adminService.createTool(tool).then(function (result) {
             $scope.tools.push(result.data);
             $scope.newTool = {};

@@ -15,6 +15,7 @@
 
                 $scope.tool_ID = tool_ID;
                 $scope.editingTool = {};
+                $scope.readOnlyF = true;
 
                 toolService.getTool(tool_ID).then(function (result) {
                         $scope.editingTool = result.data;
@@ -28,6 +29,10 @@
                                         Materialize.toast('Ha ocurrido un problema.', 4000, 'rounded');
                         }
                 });
+
+                $scope.switchForm = function () {
+                        $scope.readOnlyF = !$scope.readOnlyF;
+                };
 
                 $scope.updateTool = function (tool){
                         tool.params = {};
