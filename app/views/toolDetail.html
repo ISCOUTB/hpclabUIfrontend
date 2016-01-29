@@ -1,5 +1,5 @@
-<div class="row" style="margin-top: 100px;">
-    <div class="col m4 s12">
+<div class="row">
+    <div id="general" class="col s12 l12 section scrollspy">
         <h5>Información general</h5>
         <br>
         <form name="EditingToolForm" novalidate>
@@ -8,14 +8,19 @@
                 <input value="editingTool.name" name="name" type="text" id="name" ng-required="true"
                        ng-model="editingTool.name" ng-readonly="readOnlyF">
             </div>
-            <!--<text-angular ng-model="editingTool.description">-->
-            <!--</text-angular>-->
+            <div class="switch">
+                <label>
+                    Privada
+                    <input type="checkbox" ng-disabled="readOnlyF" ng-model="editingTool.public">
+                    <span class="lever"></span>
+                    Pública
+                </label>
+            </div>
             <div class="input-field">
-                <label for="doc">Documentación</label>
-                <textarea value="editingTool.description" name="doc" id="doc" ng-required="true"
-                          ng-model="editingTool.description" class="materialize-textarea" ng-readonly="readOnlyF">
-
-                </textarea>
+                <p>Documentación</p>
+                <text-angular id="doc" name="doc" ta-disabled="readOnlyF" ng-model="editingTool.description"
+                              ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'], ['html', 'insertImage','insertLink']]">
+                </text-angular>
             </div>
         </form>
         <div style="text-align: center;">
@@ -31,11 +36,11 @@
             <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="readOnlyF">Cancelar</button>
         </div>
     </div>
-    <div class="col m4 s12">
+    <div div id="params" class="col s12 l12 section scrollspy">
         <h5>Parámetros</h5>
 
     </div>
-    <div class="col m4 s12">
+    <div id="files" class="col s12 l12 section scrollspy">
         <h5>Archivos</h5>
         <a ngf-select="prepareFiles($files, $invalidFiles)" multiple ngf-max-size="100MB"
            ngf-fix-orientation="false" class="waves-effect waves-light btn fixed-btn"><i

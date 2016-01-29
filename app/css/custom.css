@@ -36,9 +36,9 @@ body {
 
 .section-tabs {
    display: block;
-   margin-left: 260px;
-   margin-bottom: 40px;
+   left: 260px;
    width: 100%;
+   position: fixed;
 }
 
 .ta-toolbar {
@@ -54,12 +54,19 @@ body {
    margin-bottom: 5px;
    background: #DFDFDF;
    color: #5A5656;
-
 }
 
 .ta-toolbar .btn-group .active {
    background: #26A69A ;
    color: #fff;
+}
+
+.ta-editor.ta-html, .ta-scroll-window.form-control {
+   min-height: 200px;
+}
+
+.ta-scroll-window > .ta-bind {
+   min-height: 200px;
 }
 
 @media screen and (min-width: 993px) {
