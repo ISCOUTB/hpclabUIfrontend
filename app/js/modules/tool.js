@@ -16,6 +16,7 @@
                 $scope.tool_ID = tool_ID;
                 $scope.editingTool = {};
                 $scope.readOnlyF = true;
+                $scope.toUploadFiles = [];
 
                 toolService.getTool(tool_ID).then(function (result) {
                         $scope.editingTool = result.data;
@@ -58,6 +59,23 @@
                                         Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
                                 });
                         }
+                };
+
+                $scope.formatSize = function (bytes) {
+                        if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+                        var precision = 1;
+                        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+                                number = Math.floor(Math.log(bytes) / Math.log(1024));
+                        return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+
+                };
+
+                $scope.prepareFiles = function (files) {
+                        $scope.toUploadFiles = files;
+                };
+
+                $scope.inspectFiles = function () {
+                        console.log($scope.toUploadFiles);
                 };
 
 
