@@ -10,6 +10,7 @@
       //Control Scroll
 
       $('.scrollspy').scrollSpy();
+      $('select').material_select();
 
 
       $scope.tools = [];

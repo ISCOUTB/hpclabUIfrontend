@@ -1,106 +1,89 @@
 <div class="row">
-    <div class="section-tabs">
-        <a class="waves-effect waves-light btn-large" href="#general"><i class="material-icons left">border_color</i>Información</a>
-        <a class="waves-effect waves-light btn-large" href="#params"><i class="material-icons left">build</i>Parametros</a>
-        <a class="waves-effect waves-light btn-large" href="#files"><i class="material-icons right">attach_file</i>Archivos</a>
-        <div class="limp"></div>
-    </div>
-    <div style="top: 90px; position: relative;">
-        <div id="general" class="col s12 l12 section scrollspy">
-            <h5>Información general</h5>
+   <div id="general" class="col m4 s12 l12 section scrollspy">
+      <h5>Información general</h5>
+      <br>
+      <form name="EditingToolForm" novalidate>
+         <div class="input-field">
+            <label for="name">Nombre</label>
+            <input value="editingTool.name" name="name" type="text" id="name" ng-required="true" ng-model="editingTool.name">
+         </div>
+         <text-angular ng-model="editingTool.description" ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'], ['html', 'insertImage','insertLink']]">
+         </text-angular>
+         <!--div class="input-field">
+                <label for="doc">Documentación</label>
+                <textarea value="editingTool.description" name="doc" id="doc" ng-required="true"
+                          ng-model="editingTool.description" class="materialize-textarea">
+
+                </textarea>
+            </div-->
+      </form>
+      <div style="text-align: center;">
+         <button class="btn waves-effect waves-light" ng-disabled="EditingToolForm.$invalid || EditingToolForm.$pristine" ng-click="updateTool(editingTool)">Guardar
+         </button>
+      </div>
+   </div>
+   <div id="params" class="col s12 l12 section scrollspy">
+      <h5>Parámetros</h5>
+      <div class="row">
+
+         <div class="col s12 l4">
+            <a class="waves-effect waves-light btn"><i class="material-icons right">note_add</i>Nuevo</a>
+            <label>Tipo de parametro</label>
+            <select class="browser-default">
+               <option value="" disabled selected>Seleccione uno</option>
+               <option value="1">Valor</option>
+               <option value="2">Rango</option>
+               <option value="3">Archivo</option>
+            </select>
+         </div>
+
+         <div col s12 l12>
             <br>
-            <form name="EditingToolForm" novalidate>
-                <div class="input-field">
-                    <label for="name">Nombre</label>
-                    <input value="editingTool.name" name="name" type="text" id="name" ng-required="true"
-                           ng-model="editingTool.name" ng-readonly="readOnlyF">
-                </div>
-                <div class="switch">
-                    <label>
-                        Privada
-                        <input type="checkbox" ng-disabled="readOnlyF" ng-model="editingTool.public">
-                        <span class="lever"></span>
-                        Pública
-                    </label>
-                </div>
-                <div class="input-field">
-                    <p>Documentación</p>
-                    <text-angular id="doc" name="doc" ta-disabled="readOnlyF" ng-model="editingTool.description"
-                                  ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'], ['html', 'insertImage','insertLink']]">
-                    </text-angular>
-                </div>
-            </form>
-            <div style="text-align: center;">
-                <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="!readOnlyF">
-                    Editar
-                </button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+         </div>
+         <br>
+         <br>
+         <br>
+         <br>
 
-                <button class="btn waves-effect waves-light"
-                        ng-disabled="EditingToolForm.$invalid || EditingToolForm.$pristine"
-                        ng-click="updateTool(editingTool)" ng-hide="readOnlyF">Guardar
-                </button>
+      </div>
 
-                <button class="btn waves-effect waves-light" ng-click="switchForm()" ng-hide="readOnlyF">Cancelar
-                </button>
-            </div>
-        </div>
-        <div div id="params" class="col s12 l12 section scrollspy">
-            <h5>Parámetros</h5>
+   </div>
+   <div id="files" class="col s12 l5 section scrollspy">
+      <h5>Archivos</h5>
+      <br>
 
-        </div>
-        <div id="files" class="col s12 l12 section scrollspy">
-            <h5>Archivos</h5>
-            <div class="row">
-                <div class="col s12 m5">
-                    <a ngf-select="prepareFiles($files, $invalidFiles)" multiple ngf-max-size="100MB"
-                       ngf-fix-orientation="false" class="waves-effect waves-light btn fixed-btn"><i
-                            class="material-icons right">file_upload</i>Seleccionar archivos</a>
-                    <ul>
-                        <li class="divider"></li>
-                    </ul>
-                    <table ng-show="toUploadFiles.length > 0" class="highlight" style="font-size: 12px;">
-                        <thead>
-                        <tr>
-                            <th>Ejecutable</th>
-                            <th>Peso</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="f in toUploadFiles">
-                            <td style="width: 85%;overflow: hidden; word-break: break-all;"><input name="exeG"
-                                                                                                   type="radio"
-                                                                                                   id="{{$index}}"
-                                                                                                   ng-init="f.exe = false"
-                                                                                                   ng-click="f.exe = !f.exe"/><label
-                                    for="{{$index}}">{{f.name}}</label></td>
-                            <td style="width: 15%">{{formatSize(f.size)}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button class="waves-effect waves-light btn fixed-btn" ng-click="inspectFiles()"><i
-                            class="material-icons right">file_upload</i>Cargar
-                    </button>
-
-                </div>
-                <div class="col s12 m7">
-
-                </div>
-            </div>
-
-        </div>
-    </div>
+   </div>
 </div>
 <div class="fixed-action-btn">
-    <a class="btn-floating btn-large" style="background-color: #19B597;">
-        <i class="large material-icons">settings</i>
-    </a>
-    <ul>
-        <li>
-            <a ng-click="deleteTool()" class="btn-floating red">
-                <i class="material-icons">
+   <a class="btn-floating btn-large" style="background-color: #19B597;">
+      <i class="large material-icons">settings</i>
+   </a>
+   <ul>
+      <li>
+         <a ng-click="deleteTool()" class="btn-floating red">
+            <i class="material-icons">
                     delete
                 </i>
-            </a>
-        </li>
-    </ul>
+         </a>
+      </li>
+      <!--<li>-->
+      <!--<a href="#editProjectModal" ng-click="copyProject()" class="btn-floating blue" modal>-->
+      <!--<i class="material-icons">-->
+      <!--mode_edit-->
+      <!--</i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a class="btn-floating green">-->
+      <!--<i class="material-icons">-->
+      <!--check_circle-->
+      <!--</i>-->
+      <!--</a>-->
+      <!--</li>-->
+   </ul>
 </div>
