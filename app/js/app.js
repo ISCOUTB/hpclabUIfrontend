@@ -58,7 +58,7 @@
                         })
                         .state('home', {
                                 url: '/',
-                                templateUrl: '/views/home2.html',
+                                templateUrl: '/views/home.html',
                                 controller: 'HomeController'
                         })
                         .state('home.project', {
