@@ -77,7 +77,7 @@
                                 controller: 'FileController'
                         })
                         .state('admin', {
-                                url: '/admin/',
+                                url: '/admin',
                                 templateUrl: '/views/admin.html',
                                 controller: 'AdminController'
                         })
