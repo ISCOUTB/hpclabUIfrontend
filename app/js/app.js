@@ -58,7 +58,7 @@
                         })
                         .state('home', {
                                 url: '/',
-                                templateUrl: '/views/home2.html',
+                                templateUrl: '/views/home.html',
                                 controller: 'HomeController'
                         })
                         .state('home.project', {
@@ -77,7 +77,7 @@
                                 controller: 'FileController'
                         })
                         .state('admin', {
-                                url: '/admin/',
+                                url: '/admin',
                                 templateUrl: '/views/admin.html',
                                 controller: 'AdminController'
                         })
