@@ -16,7 +16,6 @@
          <ul id="userDropdown" class="dropdown-content">
             <li><a href="#editUserModal" ng-click="copyUser()" modal>Editar información</a></li>
             <li class="divider"></li>
-            <!--li ng-if="user.is_staff"-->
             <li ng-if="user.is_staff">
 
                <a ui-sref="admin">Administrador</a>
@@ -26,3 +25,30 @@
       </div>
    </div>
 </nav>
+<div id="editUserModal" class="modal">
+    <div class="modal-content">
+        <h4>Edición de usuario</h4>
+
+        <form name="UserForm" novalidate>
+            <input type="hidden" name="id" ng-model="uUser.id" value="{{user.id}}">
+            <input type="hidden" name="username" ng-model="uUser.username" value="{{user.username}}">
+
+            <div class="input-field">
+                <label for="first_name">Nombres</label>
+                <input class="validate" name="first_name" type="text" id="first_name" ng-required="true" ng-model="uUser.first_name">
+            </div>
+            <div class="input-field">
+                <label for="last_name">Apellidos</label>
+                <input name="last_name" type="text" id="last_name" ng-required="true" ng-model="uUser.last_name">
+            </div>
+            <div class="input-field">
+                <label for="email">Email</label>
+                <input name="email" id="email" type="email" ng-required="true" ng-model="uUser.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            </div>
+        </form>
+    </div>
+    <div class="modal-fixed-footer center-align">
+        <button class="btn waves-effect waves-light" ng-disabled="UserForm.$invalid || UserForm.$pristine" ng-click="updateUser(uUser)">Editar
+        </button>
+    </div>
+</div>

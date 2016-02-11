@@ -73,20 +73,12 @@ body {
 
 @media screen and (min-width: 993px) {
    .fixed-container {
-      margin-left: 260px;
-   }
-   .center-view {
-      margin-left: 10px !important;
+      margin-left: 240px;
    }
 }
 
 @media screen and (max-width: 992px) {
-   .fixed-container {
-      margin-left: 20px;
-   }
-   .center-view {
-      margin-left: 20px !important;
-   }
+
 }
 
 .card-image {
@@ -97,4 +89,9 @@ body {
 .card-image img {
    height: 500px;
    margin-top: -200px;
+}
+
+body, html {
+   background: repeat-y;
+   background-color: #f1f2f7;
 }

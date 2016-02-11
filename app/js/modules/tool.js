@@ -9,14 +9,30 @@
 (function () {
         var tool = angular.module('toolmodule', []);
 
-        tool.controller('ToolController', function ($scope, $rootScope, toolService, Auth, $stateParams, $location, _) {
+        tool.controller('ToolController', function ($scope, $rootScope, toolService, Auth, $state, $stateParams, $location, _) {
 
                 var tool_ID = parseInt($stateParams.toolID);
 
                 $scope.tool_ID = tool_ID;
                 $scope.editingTool = {};
+                $scope.editingToolCopy = {};
                 $scope.readOnlyF = true;
                 $scope.toUploadFiles = [];
+                $scope.toolFiles = [];
+                $scope._ = _;
+                $scope.exeDefined = false;
+
+                $scope.checkExec = function() {
+                        return _.isEmpty(_.find($scope.toUploadFiles, {'exe': true} ));
+                };
+
+                $scope.checkExistingExec = function () {
+                        return !_.isEmpty(_.find($scope.toolFiles, {'exe': true} ));
+                };
+
+                $scope.removePreuploadFile = function (file) {
+                        $scope.toUploadFiles.splice(_.findIndex($scope.toUploadFiles, {'id': file.id}), 1);
+                };
 
                 toolService.getTool(tool_ID).then(function (result) {
                         $scope.editingTool = result.data;
@@ -31,20 +47,32 @@
                         }
                 });
 
-                $scope.switchForm = function () {
+                toolService.getFiles(tool_ID).then(function (result){
+                        $scope.toolFiles = result.data;
+                });
+
+                $scope.enableForm = function () {
+                        $scope.editingToolCopy = angular.copy($scope.editingTool);
                         $scope.readOnlyF = !$scope.readOnlyF;
                 };
 
+                $scope.disableForm = function () {
+                        $scope.readOnlyF = !$scope.readOnlyF;
+                        $scope.editingToolCopy = {};
+                };
+
                 $scope.updateTool = function (tool){
-                        tool.params = {};
+                        if(tool.params == null) tool.params = {};
                         toolService.editTool(tool).then(function (result) {
                                 $scope.editingTool = result.data;
                                 $scope.tools[_.findIndex($scope.tools, {'id': tool.id})] = result.data;
+                                $scope.readOnlyF = !$scope.readOnlyF;
+                                $scope.editingToolCopy = {};
                                 $scope.EditingToolForm.$setPristine();
                                 $scope.EditingToolForm.$setUntouched();
                                 Materialize.toast("Edición de herramienta exitosa", 4000, 'rounded');
-
                         });
+
 
                 };
 
@@ -74,14 +102,16 @@
                         $scope.toUploadFiles = files;
                 };
 
-                $scope.inspectFiles = function () {
-                        console.log($scope.toUploadFiles);
-                };
-
-
+                $scope.uploadFiles = function () {
+                        angular.forEach($scope.toUploadFiles, function(file){
+                                toolService.uploadFile(file).then(function(response){
+                                        $scope.toolFiles.push(file);
+                                })
+                        });
+                }
         });
 
-        tool.service('toolService', function ($http, getServerName) {
+        tool.service('toolService', function ($http, getServerName, Upload) {
 
                 var requestSvc = {};
 
@@ -109,6 +139,28 @@
                                 url: getServerName + "/tools/" + id + '/'
                         })
 
+                };
+
+                requestSvc.getFiles = function (id) {
+                        return $http({
+                                method: "GET",
+                                skipAuthorization: false,
+                                url: getServerName + "/tools/" + id + '/files/'
+                        })
+                };
+
+                requestSvc.uploadFile = function (file) {
+                        return Upload.upload({
+                                method: "PUT",
+                                skipAuthorization: false,
+                                url: getServerName + "/files/",
+                                data: {
+                                        file: file,
+                                        filename: file.name,
+                                        size: file.size,
+                                        type: file.type
+                                }
+                        });
                 };
 
                 return requestSvc;

@@ -21,13 +21,14 @@
             </a>
 
          </li>
+         <li class="divider"></li>
 
 
          <li ng-repeat="tool in tools" class="animation projects-list waves-effect">
             <i class="material-icons left">build</i>
             <a ui-sref="admin.tool({toolID: tool.id})" class="truncate">{{tool.name}}</a>
          </li>
-         <li class="divider"></li>
+
       </ul>
    </div>
 </header>
@@ -41,12 +42,12 @@
       <form name="ToolForm" novalidate>
          <div class="input-field">
             <label for="name">Nombre</label>
-            <input name="name" type="text" id="name" ng-required="true" ng-model="tool.name">
+            <input name="name" type="text" id="name" ng-required="true" ng-model="newTool.name">
          </div>
       </form>
    </div>
    <div class="modal-fixed-footer center-align">
-      <button class="btn waves-effect waves-light" ng-disabled="ToolForm.$invalid || ToolForm.$pristine" ng-click="createTool(tool)">Guardar
+      <button class="btn waves-effect waves-light" ng-disabled="ToolForm.$invalid || ToolForm.$pristine" ng-click="createTool(newTool)">Guardar
       </button>
    </div>
 </div>

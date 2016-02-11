@@ -15,7 +15,8 @@
         </form>
     </div>
     <div class="modal-fixed-footer center-align">
-        <button class="btn waves-effect waves-light" ng-disabled="UpdateProjectForm.$invalid || UpdateProjectForm.$pristine"
+        <button class="btn waves-effect waves-light"
+                ng-disabled="UpdateProjectForm.$invalid || UpdateProjectForm.$pristine"
                 ng-click="updateProject(uProject)">Guardar
         </button>
     </div>
@@ -51,12 +52,18 @@
     </ul>
 </div>
 
-<div class="card-panel">
-    <h4 class="project-title">{{editingProject.name}}</h4>
-    <label class="project-created">{{editingProject.created_at | date: '' :
-        timezone}}</label>
+<div class="row">
+    <div id="generalInformation" class="col s12 m12">
+        <div class="card-panel">
+            <h4 class="project-title">{{editingProject.name}}</h4>
+            <label class="project-created">{{editingProject.created_at | date: '' :
+                timezone}}</label>
 
-    <p class="project-description">{{editingProject.description}}</p>
+            <p class="project-description">{{editingProject.description}}</p>
+        </div>
+    </div>
+    <div id="workflowImplementation" class="col s12 m12">
+
+    </div>
 </div>
-<div>Workflow implementation</div>
 <div class="limp"></div>

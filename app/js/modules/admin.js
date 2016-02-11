@@ -6,7 +6,7 @@
 (function () {
    var admin = angular.module('adminmodule', []);
 
-   admin.controller('AdminController', function ($scope, adminService, $location) {
+   admin.controller('AdminController', function ($scope, adminService, $location, $stateParams) {
       //Control Scroll
 
       $('.scrollspy').scrollSpy();
