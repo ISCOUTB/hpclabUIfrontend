@@ -22,12 +22,12 @@
                 $scope._ = _;
                 $scope.exeDefined = false;
 
-                $scope.checkExec = function() {
-                        return _.isEmpty(_.find($scope.toUploadFiles, {'exe': true} ));
+                $scope.checkExec = function () {
+                        return $scope.checkExistingExec();
                 };
 
                 $scope.checkExistingExec = function () {
-                        return !_.isEmpty(_.find($scope.toolFiles, {'exe': true} ));
+                        return !_.isEmpty(_.find($scope.toolFiles, {'exe': true}));
                 };
 
                 $scope.removePreuploadFile = function (file) {
@@ -47,7 +47,7 @@
                         }
                 });
 
-                toolService.getFiles(tool_ID).then(function (result){
+                toolService.getFiles(tool_ID).then(function (result) {
                         $scope.toolFiles = result.data;
                 });
 
@@ -61,8 +61,8 @@
                         $scope.editingToolCopy = {};
                 };
 
-                $scope.updateTool = function (tool){
-                        if(tool.params == null) tool.params = {};
+                $scope.updateTool = function (tool) {
+                        if (tool.params == null) tool.params = {};
                         toolService.editTool(tool).then(function (result) {
                                 $scope.editingTool = result.data;
                                 $scope.tools[_.findIndex($scope.tools, {'id': tool.id})] = result.data;
@@ -77,13 +77,13 @@
                 };
 
                 $scope.deleteTool = function () {
-                        if (confirm('Está seguro?')){
-                                toolService.deleteTool(tool_ID).then(function(){
+                        if (confirm('Está seguro?')) {
+                                toolService.deleteTool(tool_ID).then(function () {
                                         $scope.tools.splice(_.findIndex($scope.tools, {'id': tool_ID}), 1);
                                         $scope.editingTool = {};
                                         $state.transitionTo('admin');
                                         Materialize.toast('La herramienta ha sido eliminado exitosamente.', 4000, 'rounded');
-                                }, function (){
+                                }, function () {
                                         Materialize.toast('Ha ocurrido un error en la operación.', 4000, 'rounded');
                                 });
                         }
@@ -99,16 +99,34 @@
                 };
 
                 $scope.prepareFiles = function (files) {
+                        angular.forEach(files, function (file) {
+                                file.filename = file.name;
+                        });
                         $scope.toUploadFiles = files;
+                        return $scope.checkExistingExec();
                 };
 
                 $scope.uploadFiles = function () {
-                        angular.forEach($scope.toUploadFiles, function(file){
-                                toolService.uploadFile(file).then(function(response){
+                        angular.forEach($scope.toUploadFiles, function (file) {
+                                toolService.uploadFile(tool_ID, file).then(function (response) {
                                         $scope.toolFiles.push(file);
+                                        $scope.toUploadFiles.splice(_.findIndex($scope.toUploadFiles, {'id': file.id}), 1);
+                                }, function (response) {
+                                        Materialize.toast('Ha ocurrido un error en la carga del archivo "' + file.name + '".', 4000, 'rounded');
                                 })
                         });
-                }
+                };
+
+
+                $scope.deleteFile = function (file) {
+                        if (confirm('Está seguro?')) {
+                                toolService.deleteFile(tool_ID, file).then(function () {
+                                        $scope.toolFiles.splice(_.findIndex($scope.toolFiles, {'id': file.id}), 1);
+                                }, function (response) {
+                                        Materialize.toast('Ha ocurrido un error eliminando el archivo "' + file.filename + '".', 4000, 'rounded');
+                                });
+                        }
+                };
         });
 
         tool.service('toolService', function ($http, getServerName, Upload) {
@@ -149,19 +167,30 @@
                         })
                 };
 
-                requestSvc.uploadFile = function (file) {
+                requestSvc.uploadFile = function (tool_ID, file) {
                         return Upload.upload({
                                 method: "PUT",
                                 skipAuthorization: false,
-                                url: getServerName + "/files/",
+                                url: getServerName + "/tools/" + tool_ID + "/files/",
                                 data: {
+                                        tool: tool_ID,
                                         file: file,
                                         filename: file.name,
                                         size: file.size,
-                                        type: file.type
+                                        type: file.type,
+                                        exe: file.exe
                                 }
                         });
                 };
+
+                requestSvc.deleteFile = function (tool_ID, file) {
+                        return $http({
+                                method: "DELETE",
+                                skipAuthorization: false,
+                                url: getServerName + '/tools/' + tool_ID + '/files/' + file.id + '/'
+                        })
+                };
+
 
                 return requestSvc;
         })

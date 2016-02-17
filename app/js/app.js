@@ -82,7 +82,7 @@
                                 controller: 'AdminController'
                         })
                         .state('admin.tool', {
-                                url: 'tool/:toolID',
+                                url: '/tool/:toolID',
                                 templateUrl: '/views/toolDetail.html',
                                 controller: 'ToolController',
                                 onEnter: function ($state, $stateParams) {

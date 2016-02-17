@@ -97,7 +97,7 @@
                                                                                                        id="{{$index}}"
                                                                                                        ng-init="f.exe = false"
                                                                                                        ng-click="f.exe = !f.exe"/><label
-                                        for="{{$index}}">{{f.name}}</label></td>
+                                        for="{{$index}}">{{f.filename}}</label></td>
                                 <td style="width: 15%">{{formatSize(f.size)}}</td>
                                 <td><a href="#" ng-click="removePreuploadFile(f)">x</a></td>
                             </tr>
@@ -110,7 +110,7 @@
 
                     </div>
                     <div class="col s12 m8">
-                        <table ng-show="toUploadFiles.length > 0" class="highlight" style="font-size: 12px;">
+                        <table ng-show="toolFiles.length > 0" class="highlight" style="font-size: 12px;">
                             <thead>
                             <tr>
                                 <th>Exe</th>
@@ -122,7 +122,7 @@
                             <tbody>
                             <tr ng-repeat="f in toolFiles">
                                 <td style="width: 10%;"><i ng-if="f.exe" class="material-icons">check_circle</i></td>
-                                <td style="width: 70%;overflow: hidden;  word-break: break-all;">{{f.name}}</td>
+                                <td style="width: 70%;overflow: hidden;  word-break: break-all;">{{f.filename}}</td>
                                 <td style="width: 15%">{{formatSize(f.size)}}</td>
                                 <td><a href="#" ng-click="deleteFile(f)">x</a></td>
                             </tr>
