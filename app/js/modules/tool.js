@@ -23,7 +23,11 @@
                 $scope.exeDefined = false;
 
                 $scope.checkExec = function () {
-                        return $scope.checkExistingExec();
+                        if ($scope.checkExistingExec()){
+                                return false;
+                        }else if(_.isEmpty(_.find($scope.toUploadFiles, {'exe': true}))){
+                                return true;
+                        }
                 };
 
                 $scope.checkExistingExec = function () {

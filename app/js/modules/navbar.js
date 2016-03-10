@@ -19,7 +19,7 @@
 
       $scope.updateUser = function (user) {
          navbarService.updateUser(user).then(function (result) {
-            $rootScope.user = result.data;
+            $scope.user = result.data;
             $("#editUserModal").closeModal();
             Materialize.toast('Edición de usuario exitosa.', 4000, 'rounded');
          });
