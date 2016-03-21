@@ -73,6 +73,7 @@
 
 	factories.factory('getServerName', function () {
 		//return 'http://0.0.0.0:9000';
+		// return 'http://192.168.172.129:9000';
 		return 'https://api.hpclab.unitecnologica.edu.co';
 	});
 

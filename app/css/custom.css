@@ -1,80 +1,81 @@
 body {
-   overflow-x: hidden;
-   background-color: #f1f2f7;
+    overflow-x: hidden;
+    background-color: #f1f2f7;
 }
 
 .center {
-   text-align: center;
+    text-align: center;
 }
 
 .k {
-   font-size: 12px;
+    font-size: 12px;
 }
 
 .fixed-btn {
-   width: 100%;
+    width: 100%;
 }
+
 .selectedFile {
-   background: #32323A;
-   color: white;
-   font-weight: bold;
+    background: #32323A;
+    color: white;
+    font-weight: bold;
 }
 
 .card-image {
-   height: 400px;
-   overflow: hidden;
+    height: 400px;
+    overflow: hidden;
 }
 
 .card-image img {
-   height: 500px;
+    height: 500px;
 }
 
 .marg-top {
-   position: relative;
-   top: 84px;
+    position: relative;
+    top: 84px;
 }
 
 .section-tabs {
-   display: block;
-   left: 260px;
-   width: 100%;
-   position: fixed;
-   top: 84px;
-   z-index: 10;
+    display: block;
+    left: 260px;
+    width: 100%;
+    position: fixed;
+    top: 84px;
+    z-index: 10;
 }
 
 .ta-toolbar {
-   margin-top: 20px;
+    margin-top: 20px;
 }
 
 .ta-toolbar .btn-group {
-   display: inline;
-   margin-right: 10px;
+    display: inline;
+    margin-right: 10px;
 }
 
 .ta-toolbar .btn-group .btn {
-   margin-bottom: 5px;
-   background: #DFDFDF;
-   color: #5A5656;
+    margin-bottom: 5px;
+    background: #DFDFDF;
+    color: #5A5656;
 }
 
 .ta-toolbar .btn-group .active {
-   background: #26A69A ;
-   color: #fff;
+    background: #26A69A;
+    color: #fff;
 }
 
 .ta-editor.ta-html, .ta-scroll-window.form-control {
-   min-height: 200px;
+    min-height: 200px;
 }
 
 .ta-scroll-window > .ta-bind {
-   min-height: 200px;
+    min-height: 200px;
 }
 
 @media screen and (min-width: 993px) {
-   .fixed-container {
-      margin-left: 240px;
-   }
+    .fixed-container {
+        margin-left: 240px;
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -82,16 +83,19 @@ body {
 }
 
 .card-image {
-   height: 200px;
-   overflow: hidden;
+    height: 200px;
+    overflow: hidden;
 }
 
 .card-image img {
-   height: 500px;
-   margin-top: -200px;
+    height: 500px;
+    margin-top: -200px;
+}
+
+.paramType {
+    margin-bottom: 20px;
 }
 
 body, html {
-   background: repeat-y;
-   background-color: #f1f2f7;
+    background: repeat-y #f1f2f7;
 }

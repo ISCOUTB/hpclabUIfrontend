@@ -10,6 +10,7 @@
       //Control Scroll
 
       $('.scrollspy').scrollSpy();
+      $('.collapsible').collapsible();
       $('select').material_select();
 
 
