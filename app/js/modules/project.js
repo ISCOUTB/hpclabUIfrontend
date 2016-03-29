@@ -31,6 +31,10 @@
 
                 });
 
+                projectService.getTools().then(function (result) {
+                        console.log(result);
+                });
+
                 $scope.copyProject = function () {
                         $scope.uProject = angular.copy($scope.editingProject);
                 };
@@ -88,6 +92,14 @@
                                 method: "DELETE",
                                 skipAuthorization: false,
                                 url: getServerName + '/projects/' + id + '/'
+                        })
+                };
+
+                requestSvc.getTools = function () {
+                        return $http({
+                                method: "GET",
+                                skipAuthorization: false,
+                                url: getServerName + '/ptools/'
                         })
                 };
 
