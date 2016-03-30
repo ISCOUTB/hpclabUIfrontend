@@ -58,7 +58,11 @@
       <div class="row">
 
          <div ui-view class="col  s12 center-view">
-
+            <div class="center" ng-if="tools.length == 0">
+               <p><i style="font-size: 80px;" class="material-icons teal-text">sentiment_dissatisfied
+               </i></p>
+               <p>No hay herramientas aún, agrega una.</p>
+            </div>
          </div>
 
       </div>

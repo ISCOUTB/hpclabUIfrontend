@@ -6,14 +6,16 @@
 
 (function () {
 
-        var project = angular.module('projectmodule', ['ngFileUpload']);
+        var project = angular.module('projectmodule', ['ngFileUpload', 'uuid4']);
 
-        project.controller('ProjectController', function ($scope, $rootScope, homeService, projectService, $stateParams, $timeout, $state, $location, _) {
+        project.controller('ProjectController', function ($scope, $rootScope, homeService, projectService, $stateParams, $timeout, $state, $location, _, uuid4) {
 
                 var projectID = parseInt($stateParams.projectID);
                 $('.collapsible').collapsible();
+                $('.tooltipped').tooltip();
                 $scope.datafiles = [];
                 $scope.selectedFiles = [];
+                $scope.confTaskForm = [];
                 $scope.uploading = false;
                 $scope.formatSize = function (bytes) {
                         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
@@ -27,7 +29,6 @@
                 $scope.tasks = [];
 
                 projectService.getTools().then(function (result) {
-                        console.log(result.data);
                         $scope.tools = result.data;
                 });
 
@@ -86,7 +87,6 @@
 
                 projectService.getFiles(projectID).then(function (result) {
                         $scope.datafiles = result.data;
-                        console.log(result);
                 });
 
                 $scope.uploadFiles = function (files) {
@@ -135,8 +135,18 @@
 
                 //Project tasks (Add tasks, configure, delete)
 
-                $scope.addTask = function (tool) {
-                        $scope.tasks.push(tool);
+                $scope.addTask = function (task) {
+                        task.project = projectID;
+                        task.uuid = uuid4.generate();
+                        task.tool = task.id;
+                        delete task.id;
+                        $scope.tasks.push(task);
+                };
+                
+                $scope.configureTaskForm = function (task) {
+                        console.log(task.params);
+                        $scope.confTaskForm = [];
+                        $scope.confTaskForm.push(task.params);
                 };
         });
 

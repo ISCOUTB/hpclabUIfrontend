@@ -7,6 +7,7 @@
 
         var tool_ID = parseInt($stateParams.toolID);
         $('select').material_select();
+        $('.tooltipped').tooltip({delay: 50});
         $scope._ = _;
         $scope.tool_ID = tool_ID;
         $scope.editingTool = {};
@@ -19,6 +20,7 @@
         $scope.paramForm = [];
         $scope.newParam = {};
         $scope.updateParamForm = [];
+        $scope.paramUpdated = false;
         $scope.originalParam = {};
         $scope.editingParam = {};
         $scope.editingParamHash = null;
@@ -36,11 +38,18 @@
                     {type: "text", name: "name", label: "Nombre", required: true},
                     {type: "text", name: "description", label: "Descripción", required: false}
                 ]
+            },
+            {
+                file: [
+                    {type: "text", name: "name", label: "Nombre", required: true},
+                    {type: "text", name: "description", label: "Descripción", required: false}
+                ]
             }
         ];
         $scope.toUploadFiles = [];
         $scope.toolFiles = [];
         $scope.exeDefined = false;
+
 
         $scope.formatSize = function (bytes) {
             if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
@@ -85,8 +94,10 @@
             toolService.editTool(tool).then(function (result) {
                 $scope.editingTool = result.data;
                 $scope.tools.splice(_.findIndex($scope.tools, {'id': tool.id}), 1, result.data);
-                $scope.readOnlyF = !$scope.readOnlyF;
                 $scope.editingToolCopy = {};
+                $scope.updateCard = false;
+                $scope.infoCard = true;
+                $scope.paramUpdated = false;
                 Materialize.toast("Edición de herramienta exitosa", 4000, 'rounded');
             });
         };
@@ -103,6 +114,9 @@
                     break;
                 case 'string':
                     $scope.paramForm.push((_.find($scope.paramTypes, 'string')).string);
+                    break;
+                case 'file':
+                    $scope.paramForm.push((_.find($scope.paramTypes, 'file')).file);
                     break;
                 default:
                     break;
@@ -123,6 +137,7 @@
             $scope.newParam = {};
             $scope.paramFormVisible = false;
             $scope.paramAdd = !$scope.paramAdd;
+            $scope.paramUpdated = true;
         };
 
         $scope.showUpdateParamForm = function (param){
@@ -154,6 +169,7 @@
         $scope.updateParam = function (param){
             $scope.editingToolCopy.params.splice(_.findIndex($scope.editingToolCopy.params, $scope.originalParam), 1, param);
             this.cancelParamUpdate();
+            $scope.paramUpdated = true;
         };
 
         $scope.deleteParam = function (param) {

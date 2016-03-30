@@ -6,7 +6,7 @@
 (function () {
    var admin = angular.module('adminmodule', []);
 
-   admin.controller('AdminController', function ($scope, adminService, $location, $stateParams) {
+   admin.controller('AdminController', function ($scope, adminService, $location, $stateParams, $state) {
       //Control Scroll
 
       $('.scrollspy').scrollSpy();
@@ -25,6 +25,9 @@
 
       adminService.getTools().then(function (result) {
          $scope.tools = result.data;
+         if($scope.tools.length > 0){
+            $state.go('admin.tool', {toolID: (_.head($scope.tools)).id});
+         }
       });
 
       $scope.createTool = function (tool) {

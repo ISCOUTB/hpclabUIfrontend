@@ -65,11 +65,16 @@ body {
 }
 
 .ta-editor.ta-html, .ta-scroll-window.form-control {
-    min-height: 200px;
+    min-height: 100px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
 }
 
 .ta-scroll-window > .ta-bind {
-    min-height: 200px;
+    min-height: 100px;
 }
 
 @media screen and (min-width: 993px) {
@@ -98,4 +103,20 @@ body {
 
 body, html {
     background: repeat-y #f1f2f7;
+}
+
+.search {
+    margin: 15px 0 -15px 0;
+    padding: 0;
+}
+
+.absolute-Center {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 40px;
+    width: 50%;
+    height: 50%;
 }
