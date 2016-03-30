@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/IngenieriaDeSistemasUTB/hpclabUIfrontend#readme",
   "dependencies": {
+    "angular-uuid": "0.0.2",
     "browser-sync": "^2.9.6",
     "browser-sync-spa": "^1.0.3",
     "gulp": "^3.9.0",

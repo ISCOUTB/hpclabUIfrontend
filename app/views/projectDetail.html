@@ -22,6 +22,85 @@
     </div>
 </div>
 
+<div class="row">
+    <div id="generalInformation" class="col s12 m12">
+        <div class="card-panel">
+            <h4 class="project-title">{{editingProject.name}}</h4>
+            <label class="project-created">{{editingProject.created_at | date: '' :
+                timezone}}</label>
+
+            <p class="project-description">{{editingProject.description}}</p>
+        </div>
+    </div>
+    <div id="workflowImplementation" class="col s12">
+        <div class="row">
+            <div class="col s12 m4 l4">
+                <label class="project-title">Trabajos</label>
+            </div>
+            <div class="col s12 m4 l4">
+                <label class="project-title">Configuración de trabajos</label>
+
+            </div>
+            <div class="col s12 m4 l4">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">attachment</i>
+                            Archivos
+                            <a style="float: right;" ngf-select="uploadFiles($files, $invalidFiles)" multiple
+                               ngf-max-size="100MB" class="secondary-content">
+                                <i class="material-icons">
+                                    file_upload
+                                </i>
+                            </a>
+                        </div>
+                        <div class="collapsible-body" style="margin: 10px;">
+                            <a ng-if="selectedFiles.length > 0" ng-click="deleteFiles(selectedFiles)"
+                               class="waves-effect waves-light btn fixed-btn"><i
+                                    class="material-icons right">delete</i> Eliminar</a>
+                            <table ng-if="datafiles.length > 0" style="font-size: 11px;">
+                                <tbody>
+                                <tr ng-repeat="f in datafiles">
+                                    <td style="width: 75%; word-break: break-all;">
+                                        <input id="file{{$index}}" type="checkbox" ng-init="f.selected = false"
+                                               ng-click="select(f)">
+                                        <label for="file{{$index}}">{{f.filename}}</label></td>
+                                    <td style="width: 25%">{{formatSize(f.size)}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">build</i>
+                            Herramientas
+                        </div>
+                        <div class="collapsible-body" ng-if="tools.length > 0">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">search</i>
+                                    <input id="tool_search" type="text" ng-model="searchTool">
+                                    <label for="tool_search">Búsqueda de herramientas</label>
+                                </div>
+                            </div>
+                            <ul class="collection">
+                                <li class="collection-item" ng-repeat="tool in tools | filter:searchTool">
+                                    <div>
+                                        {{tool.name}}
+                                        <a href="#" class="secondary-content"><i class="material-icons">info_outline</i></a>
+                                        <a href="#" ng-click="addTask(tool)" class="secondary-content"><i
+                                                class="material-icons">queue</i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large" style="background-color: #19B597;">
         <i class="large material-icons">settings</i>
@@ -51,19 +130,27 @@
 
     </ul>
 </div>
-
-<div class="row">
-    <div id="generalInformation" class="col s12 m12">
-        <div class="card-panel">
-            <h4 class="project-title">{{editingProject.name}}</h4>
-            <label class="project-created">{{editingProject.created_at | date: '' :
-                timezone}}</label>
-
-            <p class="project-description">{{editingProject.description}}</p>
+<div class="card" ng-show="uploading"
+     style="position: absolute; right: 0; width: 500px; bottom: 0;">
+    <div class="card-content">
+        <div>
+            Progreso de carga
+            <a href="#" ng-click="cleanUpload()" style="float: right;">X</a>
+        </div>
+        <div style="max-height: 300px; overflow:auto; overflow-x: hidden;">
+            <table class="responsive-table" style="font-size: 12px;">
+                <tbody>
+                <tr ng-repeat="f in uploadingFiles">
+                    <td style="width: 40%;overflow: hidden; word-break: break-all;">{{f.name}}</td>
+                    <td style="width: 20%">{{formatSize(f.size)}}</td>
+                    <td style="width: 40%">
+                        <div class="progress">
+                            <div class="determinate" style="width: {{f.progress}}%"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div id="workflowImplementation" class="col s12 m12">
-
-    </div>
 </div>
-<div class="limp"></div>

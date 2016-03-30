@@ -12,7 +12,6 @@
                 'loginmodule',
                 'homemodule',
                 'projectmodule',
-                'filemodule',
                 'adminmodule',
                 'navbarmodule',
                 'toolmodule',
@@ -70,11 +69,6 @@
                                                 $state.transitionTo('/')
                                         }
                                 }
-                        })
-                        .state('home.files', {
-                                url: 'files',
-                                templateUrl: '/views/files.html',
-                                controller: 'FileController'
                         })
                         .state('admin', {
                                 url: '/admin',

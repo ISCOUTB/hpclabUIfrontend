@@ -1,9 +1,3 @@
-/**
- * Created by juan on 21/01/16.
- */
-/**
- * Created by juan on 15/01/16.
- */
 'use strict';
 
 (function () {
@@ -93,8 +87,6 @@
                 $scope.tools.splice(_.findIndex($scope.tools, {'id': tool.id}), 1, result.data);
                 $scope.readOnlyF = !$scope.readOnlyF;
                 $scope.editingToolCopy = {};
-                $scope.EditingToolForm.$setPristine();
-                $scope.EditingToolForm.$setUntouched();
                 Materialize.toast("Edición de herramienta exitosa", 4000, 'rounded');
             });
         };
