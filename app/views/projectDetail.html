@@ -21,9 +21,15 @@
         </button>
     </div>
 </div>
+<div id="moreInfoModal" class="modal">
+    <div class="modal-content">
+        <h4>{{toolInfo.name}}</h4>
+        <p ng-bind-html="toolInfo.description"></p>
+    </div>
+</div>
 
 <div class="row">
-    <div id="generalInformation" class="col s12 m7 l8">
+    <div id="generalInformation" class="col s12 m4 l4">
         <div class="card-panel">
             <h4 class="project-title">{{editingProject.name}}</h4>
             <label class="project-created">{{editingProject.created_at | date: '' :
@@ -31,46 +37,6 @@
 
             <p class="project-description">{{editingProject.description}}</p>
         </div>
-        <div class="center" ng-if="tasks.length == 0">
-            <p><i style="font-size: 80px;" class="material-icons teal-text">sentiment_dissatisfied
-            </i></p>
-            <p>No tienes ningún trabajo en este proyecto, agrega uno.</p>
-        </div>
-        <div ng-if="tasks.length > 0" class="row">
-            <div class="col s12 l7">
-                <ul class="collection with-header">
-                    <li class="collection-header"><h5>Trabajos</h5></li>
-                    <li ng-repeat="task in tasks track by $index">
-                        <div class="collapsible-header"><i class="material-icons">class</i>
-                            {{task.name}}
-                            <a href="#" ng-click="configureTaskForm(task.params)" class="secondary-content"><i
-                                    class="material-icons">settings</i></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col s12 l5">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Configuración de trabajo</span>
-                        <form>
-                            <div class="row" ng-repeat="field in confTaskForm">
-                                <div class="input-field" ng-if="field.type == 'string'">
-                                    <input id="param_{{field.name}}"
-                                           ng-model="newParam[field.name]"
-                                           placeholder="{{field.label}}"
-                                           type="{{field.type}}"
-                                           required>
-                                    <label for="param_{{field.name}}">{{field.label}}</label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col s12 m5 l4">
         <ul class="collapsible" data-collapsible="accordion">
             <li>
                 <div class="collapsible-header">
@@ -117,7 +83,7 @@
                         <li class="collection-item" ng-repeat="tool in tools | filter:searchTool">
                             <div>
                                 {{tool.name}}
-                                <a href="#" class="secondary-content"><i class="material-icons">info_outline</i></a>
+                                <a href="#" ng-click="moreInfo(tool)" class="secondary-content"><i class="material-icons">info_outline</i></a>
                                 <a href="#" ng-click="addTask(tool)" class="secondary-content"><i
                                         class="material-icons">queue</i></a>
                             </div>
@@ -126,6 +92,61 @@
                 </div>
             </li>
         </ul>
+
+    </div>
+    <div class="col s12 m8 l8">
+        <div class="center" ng-if="tasks.length == 0">
+            <p><i style="font-size: 80px;" class="material-icons teal-text">sentiment_dissatisfied
+            </i></p>
+            <p>No tienes ningún trabajo en este proyecto, agrega uno.</p>
+        </div>
+        <div ng-if="tasks.length > 0" class="row">
+            <div class="col s12 m6 l6">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h5>Trabajos</h5></li>
+                    <li ng-repeat="task in tasks track by $index">
+                        <div class="collapsible-header"><i class="material-icons">class</i>
+                            {{task.name}}
+                            <a href="#" ng-click="configureTaskForm(task)" class="secondary-content"><i
+                                    class="material-icons">settings</i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Configuración de trabajo</span>
+                        <form>
+                            <div class="row" ng-repeat="field in confTaskForm">
+                                <div ng-if="field.type == 'value'" class="input-field col s12">
+                                    <input  id="param_{{field.name}}"
+                                           ng-model="params[field.name]"
+                                           placeholder="{{field.label}}"
+                                           type="{{field.type}}"
+                                           required>
+                                    <label for="param_{{field.name}}">{{field.label}}</label>
+                                </div>
+                                <div ng-if="field.type == 'string'" class="input-field col s12">
+                                    <input ng-if="field.type == 'string'" id="param_{{field.name}}"
+                                           ng-model="params[field.name]"
+                                           placeholder="{{field.label}}"
+                                           type="{{field.type}}"
+                                           required>
+                                </div>
+                                <!-- Falta implementación de select con todos los archivos -->
+                            </div>
+                        </form>
+                        <div class="row">
+                            <a class="btn waves-effect waves-light fixed-btn" ng-click="consoleA()">Guardar</a>
+                            <a class="btn waves-effect waves-light fixed-btn grey darken-2">Cancelar
+                            </a>
+                            <a class="waves-effect waves-light btn col s12 red" ng-click="deleteTask()">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="fixed-action-btn">

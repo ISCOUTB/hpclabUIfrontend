@@ -15,8 +15,12 @@
                 $('.tooltipped').tooltip();
                 $scope.datafiles = [];
                 $scope.selectedFiles = [];
-                $scope.confTaskForm = [];
+                $scope.confTaskForm = null;
                 $scope.uploading = false;
+                $scope.selectedProjectIndex = null;
+                $scope.toolInfo = null;
+                $scope.taskConfig = false;
+                $scope.currentTaskID = null;
                 $scope.formatSize = function (bytes) {
                         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
                         var precision = 1;
@@ -28,14 +32,26 @@
                 $scope.tools = [];
                 $scope.tasks = [];
 
+                $scope.params = {};
+
                 projectService.getTools().then(function (result) {
                         $scope.tools = result.data;
                 });
+
+                projectService.getTasks(projectID).then(function (result) {
+                        $scope.tasks = result.data;
+                });
+
+                $scope.moreInfo = function(tool){
+                        $scope.toolInfo = tool;
+                        $('#moreInfoModal').openModal();
+                };
 
                 //Project info (get, update, delete)
 
                 projectService.getProject(projectID).then(function (result) {
                         $scope.editingProject = result.data;
+                        $scope.selectedProjectIndex = _.findIndex($scope.projects, {'id': projectID});
                 }, function (response) {
 
                         switch (response.status) {
@@ -93,7 +109,7 @@
                         $scope.uploadingFiles = files;
                         angular.forEach(files, function (file) {
                                 $scope.uploading = true;
-                                projectService.createFile(file, projectID).then(function (response) {
+                                projectService.addFile(file, projectID).then(function (response) {
                                         $timeout(function () {
                                                 $scope.datafiles.push(response.data);
                                         });
@@ -140,14 +156,46 @@
                         task.uuid = uuid4.generate();
                         task.tool = task.id;
                         delete task.id;
-                        $scope.tasks.push(task);
+                        projectService.addTask(task).then(function(result){
+                                $scope.tasks.push(result.data);
+                        }, function (response){
+                                Materialize.toast("Ha ocurrido un error agregando el trabajo.");
+                        });
+
                 };
                 
                 $scope.configureTaskForm = function (task) {
-                        console.log(task.params);
+                        task.params = JSON.parse(task.params);
                         $scope.confTaskForm = [];
-                        $scope.confTaskForm.push(task.params);
+                        $scope.confTaskForm = task.params;
+                        $scope.currentTask = task;
+                        $scope.taskConfig = true;
                 };
+
+                $scope.updateTask = function () {
+                        //Falta implementar
+
+                };
+
+                $scope.consoleA = function () {
+                        //$.each($scope.params, function(key, value){
+                        //        var a = _.pick($scope.currentTask, key);
+                        //        a.value = value;
+                        //        console.log(a);
+                        //});
+                        console.log($scope.currentTask);
+                };
+
+                $scope.deleteTask = function () {
+                        projectService.deleteTask($scope.currentTask).then(function(){
+                                $scope.tasks.splice(_.findIndex($scope.tasks, {'uuid': $scope.currentTask.uuid}), 1);
+                                $scope.currentTask = null;
+                                $scope.taskConfig = false;
+                                $scope.confTaskForm = null;
+                        }, function (response){
+                                Materialize.toast("Ha ocurrido un error mientras se eliminaba el trabajo.");
+                        });
+                }
         });
 
         project.service('projectService', function ($http, getServerName, Upload, $stateParams) {
@@ -195,7 +243,7 @@
                         })
                 };
 
-                requestSvc.createFile = function (file, projectID) {
+                requestSvc.addFile = function (file, projectID) {
                         return Upload.upload({
                                 method: "PUT",
                                 skipAuthorization: false,
@@ -217,6 +265,43 @@
                                 url: getServerName + '/file/' + id + '/'
                         })
                 };
+
+                requestSvc.getTasks = function (id){
+                        return $http({
+                                method: "GET",
+                                skipAuthorization: false,
+                                url: getServerName + '/project/' + id + '/tasks/'
+                        })
+                };
+
+                requestSvc.addTask = function (task){
+                        return $http({
+                                method: "PUT",
+                                skipAuthorization: false,
+                                url: getServerName + '/project/' + task.project + '/tasks/',
+                                data: task
+                        })
+                };
+
+
+                requestSvc.updateTask = function (task){
+                        return $http({
+                                method: "PUT",
+                                skipAuthorization: false,
+                                url: getServerName + '/project/' + task.project + '/task/' + task.uuid + '/',
+                                data: task
+                        })
+                };
+
+
+                requestSvc.deleteTask = function (task){
+                        return $http({
+                                method: "DELETE",
+                                skipAuthorization: false,
+                                url: getServerName + '/project/' + task.project + '/task/' + task.uuid + '/'
+                        })
+                };
+
 
                 return requestSvc;
 

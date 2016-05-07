@@ -19,11 +19,12 @@
                     <i class="material-icons right">add</i>
                 </a>
             </li>
-            <li ng-repeat="project in projects" class="animation projects-list waves-effect">
-                <i class="material-icons left">book</i>
-                <a ui-sref="home.project({projectID: project.id})" class="truncate"
-                   ng-class="{active: $index == selectedProjectIndex}">{{project.name}}</a>
-            </li>
+            <div ng-repeat="project in projects track by $index" class="project-list animation projects-list waves-effect">
+                <li ng-class="{'active': $index === selectedProjectIndex}">
+                    <i class="material-icons left">book</i>
+                    <a ui-sref="home.project({projectID: project.id})" class="truncate">{{project.name}}</a>
+                </li>
+            </div>
         </ul>
     </div>
 </header>

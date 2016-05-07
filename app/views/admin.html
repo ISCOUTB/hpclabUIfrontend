@@ -23,11 +23,13 @@
          </li>
          <li class="divider"></li>
 
+         <div ng-repeat="tool in tools"  class="project-list">
+            <li class="project-list animation projects-list waves-effect">
+               <i class="material-icons left">build</i>
+               <a ui-sref="admin.tool({toolID: tool.id})" class="truncate">{{tool.name}}</a>
+            </li>
+         </div>
 
-         <li ng-repeat="tool in tools" class="animation projects-list waves-effect">
-            <i class="material-icons left">build</i>
-            <a ui-sref="admin.tool({toolID: tool.id})" class="truncate">{{tool.name}}</a>
-         </li>
 
       </ul>
    </div>

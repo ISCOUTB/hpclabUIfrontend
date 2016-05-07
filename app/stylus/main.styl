@@ -46,7 +46,7 @@
 
 
 
-.projects-list
+.projects
   background-color #32323a
   border-bottom 1px solid #38383e
   width 100%
@@ -63,7 +63,7 @@
     text-transform uppercase
   &:hover
     background-color #28282e !important
-  .activate
+  .active
     background-color #28282e !important
 
 .limp
@@ -77,3 +77,25 @@
     margin 0 0 0 0
   .project-description
     margin 0 0 10px 0
+
+.project-list
+  background-color #32323a
+  border-bottom 1px solid #38383e
+  width 100%
+  li
+    i
+      height 50px
+      line-height 50px
+      cursor pointer
+      color #636365
+      font-size 20px
+    a
+      height 50px
+      line-height 50px
+      color #a5a5a5 !important
+      text-transform uppercase
+    &:hover
+      background-color grey
+      color black
+  .active
+    background-color red
