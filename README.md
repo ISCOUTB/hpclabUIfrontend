@@ -1,5 +1,9 @@
 # hpclab-ui-frontend
 
+Paso 0: Instalar nodejs
+
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+
 Paso 1: Clonar el repositorio en la carpeta raíz del servidor web
 
     git clone git@github.com:IngenieriaDeSistemasUTB/hpclabUIbackend.git gridui
