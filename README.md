@@ -23,10 +23,6 @@ Paso 4: Se instalan los componentes y librerías desde bower a la carpeta gridui
     bower install
     npm install
 
-Paso 5: Compilación del CSS y despliegue.
-
-    stylus app/stylus/main.styl -o app/css
-
 Paso 6 (opcional): Visualización para desarrollo
 
     gulp
