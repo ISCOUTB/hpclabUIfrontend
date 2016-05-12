@@ -29,4 +29,4 @@ Paso 5: Compilación del CSS y despliegue.
 
 Paso 6 (opcional): Visualización para desarrollo
 
-    gulp watch
+    gulp
