@@ -102,6 +102,6 @@
 })();
 
 $(document).ready(function(){
-    console.log("Ejecución, pero no hace nada");
+    //console.log("Ejecución, pero no hace nada");
     $('ul.tabs').tabs();
 });

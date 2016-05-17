@@ -102,8 +102,11 @@
                 //Project input files (get, upload, delete)
 
                 projectService.getFiles(projectID).then(function (result) {
+                        console.log(result)
                         $scope.datafiles = result.data;
-                });
+                }), function(response){
+                    console.log(response);
+                };
 
                 $scope.uploadFiles = function (files) {
                         $scope.uploadingFiles = files;
@@ -114,6 +117,7 @@
                                                 $scope.datafiles.push(response.data);
                                         });
                                 }, function (response) {
+                                    console.log(response)
                                         Materialize.toast('Ha ocurrido un error en la carga del archivo "' + file.name + '".', 4000, 'rounded');
                                 }, function (evt) {
                                         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));

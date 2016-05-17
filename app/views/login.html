@@ -59,6 +59,20 @@
             </div>
         </div>
     </div>
+    <div id="test3" class="col s12">
+        <div class="row">
+            <div class="col s12">
+                <div  class="container">
+                    <h2>listado de disponibilidad</h2>
+                    <label for="show">el archivo de raiz se actualiza cada minuto</label>
+                    <a class="waves-effect waves-light btn" ng-init="showContent()" ng-click="showContent()">Actualizar<i class="material-icons left">replay</i></a> 
+                    <div ng-if="content">
+                        <pre>{{ content }}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
